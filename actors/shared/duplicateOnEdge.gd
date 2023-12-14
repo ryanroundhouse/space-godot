@@ -3,27 +3,13 @@ extends Node2D
 var ZONE_WIDTH := 5120
 var ZONE_HEIGHT := 5120
 
-func duplicateBody(newBodyName: String, x = null, y = null):
-	var newBody = $primaryBody.duplicate()
-	newBody.name = newBodyName
-	print("X " + str(newBody.position.x) + " -> " + str(x) + " Y " + str(newBody.position.y) + " -> " + str(y))
-	if x != null:
-		newBody.position.x = x
-	if y != null:
-		newBody.position.y = y
-	add_child(newBody);
-	
-func TooCloseToBottom(x: int, y: int):
-	return y > ZONE_HEIGHT / 2 - get_viewport_rect().size.y
-func TooCloseToTop(x: int, y: int):
-	return y < -ZONE_HEIGHT / 2 + get_viewport_rect().size.y
-func TooCloseToLeft(x: int, y: int):
-	return x < ZONE_WIDTH / 2 - get_viewport_rect().size.x
-func TooCloseToRight(x: int, y: int):
-	return x > -ZONE_WIDTH / 2 + get_viewport_rect().size.x
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	duplicateIfNecessary();
+
+func duplicateIfNecessary():
 	var topBody = $topBody
 	var bottomBody = $bottomBody
 	var leftBody = $leftBody
@@ -89,3 +75,22 @@ func _process(delta):
 	else:
 		if diagBottomRightBody:
 			diagBottomRightBody.queue_free()
+
+func duplicateBody(newBodyName: String, x = null, y = null):
+	var newBody = $primaryBody.duplicate()
+	newBody.name = newBodyName
+	#print("X " + str(newBody.position.x) + " -> " + str(x) + " Y " + str(newBody.position.y) + " -> " + str(y))
+	if x != null:
+		newBody.position.x = x
+	if y != null:
+		newBody.position.y = y
+	add_child(newBody);
+	
+func TooCloseToBottom(x: int, y: int):
+	return y > ZONE_HEIGHT / 2 - get_viewport_rect().size.y
+func TooCloseToTop(x: int, y: int):
+	return y < -ZONE_HEIGHT / 2 + get_viewport_rect().size.y
+func TooCloseToLeft(x: int, y: int):
+	return x < ZONE_WIDTH / 2 - get_viewport_rect().size.x
+func TooCloseToRight(x: int, y: int):
+	return x > -ZONE_WIDTH / 2 + get_viewport_rect().size.x
