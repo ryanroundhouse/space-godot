@@ -79,7 +79,7 @@ func duplicateIfNecessary():
 func duplicateBody(newBodyName: String, x = null, y = null):
 	var newBody = $primaryBody.duplicate()
 	newBody.name = newBodyName
-	print(newBodyName + " X " + str(newBody.position.x) + " -> " + str(x) + " Y " + str(newBody.position.y) + " -> " + str(y))
+	#print(newBodyName + " X " + str(newBody.position.x) + " -> " + str(x) + " Y " + str(newBody.position.y) + " -> " + str(y))
 	if x != null:
 		newBody.position.x = x
 	if y != null:

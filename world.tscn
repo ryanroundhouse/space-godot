@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://chlw0bch6bsxd"]
+[gd_scene load_steps=4 format=3 uid="uid://chlw0bch6bsxd"]
 
 [ext_resource type="Texture2D" uid="uid://ba07h5ntgv7fy" path="res://assets/background/space1.jpg" id="1_ucbqw"]
 [ext_resource type="PackedScene" uid="uid://cy05gcnlm3mg7" path="res://actors/players/player.tscn" id="2_p8bww"]
-[ext_resource type="PackedScene" uid="uid://cirddyxholu5u" path="res://actors/obstacles/asteroid.tscn" id="3_v84al"]
 [ext_resource type="PackedScene" uid="uid://cbnvfavnl62a" path="res://actors/spawners/asteroid_spawner.tscn" id="4_aq2gw"]
 
 [node name="World" type="Node2D"]
@@ -14,95 +13,12 @@ region_enabled = true
 region_rect = Rect2(0, 0, 5120, 5120)
 
 [node name="Player" parent="." instance=ExtResource("2_p8bww")]
-position = Vector2(512, 384)
+position = Vector2(517, 395)
 
 [node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(512, 384)
-
-[node name="AstroidFolder" type="Node" parent="."]
-
-[node name="asteroid" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2200, 2245)
-
-[node name="asteroid2" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-1543, 2270)
-
-[node name="asteroid3" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-708, 2292)
-
-[node name="asteroid4" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-166, 2325)
-
-[node name="asteroid5" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(476, 2318)
-
-[node name="asteroid6" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(1160, 2302)
-
-[node name="asteroid7" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(1794, 2286)
-
-[node name="asteroid8" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2362, 2194)
-
-[node name="asteroid9" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2342, 1766)
-
-[node name="asteroid10" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2336, 1112)
-
-[node name="asteroid22" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2320, 396)
-
-[node name="asteroid11" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2362, -306)
-
-[node name="asteroid12" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2336, -1039)
-
-[node name="asteroid13" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2311, -1706)
-
-[node name="asteroid23" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(2305, -2282)
-
-[node name="asteroid14" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(1645, -2281)
-
-[node name="asteroid15" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(857, -2308)
-
-[node name="asteroid24" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(93, -2322)
-
-[node name="asteroid16" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-643, -2330)
-
-[node name="asteroid17" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-1325, -2346)
-
-[node name="asteroid18" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2185, -2322)
-
-[node name="asteroid25" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2234, -1752)
-
-[node name="asteroid26" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2230, -1171)
-
-[node name="asteroid19" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2268, -507)
-
-[node name="asteroid20" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2261, 383)
-
-[node name="asteroid21" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2258, 1135)
-
-[node name="asteroid27" parent="AstroidFolder" instance=ExtResource("3_v84al")]
-position = Vector2(-2239, 1682)
+position = Vector2(517, 395)
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("4_aq2gw")]
