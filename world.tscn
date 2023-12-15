@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://chlw0bch6bsxd"]
+[gd_scene load_steps=5 format=3 uid="uid://chlw0bch6bsxd"]
 
 [ext_resource type="Texture2D" uid="uid://ba07h5ntgv7fy" path="res://assets/background/space1.jpg" id="1_ucbqw"]
 [ext_resource type="PackedScene" uid="uid://cy05gcnlm3mg7" path="res://actors/players/player.tscn" id="2_p8bww"]
 [ext_resource type="PackedScene" uid="uid://cirddyxholu5u" path="res://actors/obstacles/asteroid.tscn" id="3_v84al"]
+[ext_resource type="PackedScene" uid="uid://cbnvfavnl62a" path="res://actors/spawners/asteroid_spawner.tscn" id="4_aq2gw"]
 
 [node name="World" type="Node2D"]
 
@@ -10,7 +11,7 @@
 texture_repeat = 2
 texture = ExtResource("1_ucbqw")
 region_enabled = true
-region_rect = Rect2(0, 0, 6400, 6400)
+region_rect = Rect2(0, 0, 5120, 5120)
 
 [node name="Player" parent="." instance=ExtResource("2_p8bww")]
 position = Vector2(512, 384)
@@ -103,3 +104,5 @@ position = Vector2(-2258, 1135)
 
 [node name="asteroid27" parent="AstroidFolder" instance=ExtResource("3_v84al")]
 position = Vector2(-2239, 1682)
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("4_aq2gw")]
