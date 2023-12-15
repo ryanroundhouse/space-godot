@@ -8,89 +8,99 @@ func _process(delta):
 	duplicateIfNecessary();
 
 func duplicateIfNecessary():
-	var topBody = $topBody
-	var bottomBody = $bottomBody
-	var leftBody = $leftBody
-	var rightBody = $rightBody
-	var diagTopLeftBody = $diagTopLeftBody
-	var diagTopRightBody = $diagTopRightBody
-	var diagBottomLeftBody = $diagBottomLeftBody
-	var diagBottomRightBody = $diagBottomRightBody
+	var topBody = has_node("topBody")
+	var bottomBody = has_node("bottomBody")
+	var leftBody = has_node("leftBody")
+	var rightBody = has_node("rightBody")
+	var diagTopLeftBody = has_node("diagTopLeftBody")
+	var diagTopRightBody = has_node("diagTopRightBody")
+	var diagBottomLeftBody = has_node("diagBottomLeftBody")
+	var diagBottomRightBody = has_node("diagBottomRightBody")
 	
 	var parent = get_parent()
+	
+	#print("parent position: (" + str(parent.position.x) + "," + str(parent.position.y) + ")")
 	
 	# create top-clone if a screen away from the bottom
 	if TooCloseToBottom(parent.position.x, parent.position.y):
 		if not topBody:
-			duplicateBody("topBody", null, $primaryBody.position.y - ZONE_HEIGHT)
+			duplicateBody("topBody", Vector2(0,-ZONE_HEIGHT))
 	else:
 		if topBody:
-			topBody.queue_free()
+			$topBody.queue_free()
 	# create bottom-clone if a screen away from the top
 	if TooCloseToTop(parent.position.x, parent.position.y):
 		if not bottomBody:
-			duplicateBody("bottomBody", null, $primaryBody.position.y + ZONE_HEIGHT)
+			duplicateBody("bottomBody", Vector2(0,ZONE_HEIGHT))
 	else:
 		if bottomBody:
-			bottomBody.queue_free()
+			$bottomBody.queue_free()
 	# create right-clone if a screen away from the left
 	if TooCloseToLeft(parent.position.x, parent.position.y):
 		if not rightBody:
-			duplicateBody("rightBody", $primaryBody.position.x + ZONE_WIDTH, null)
+			duplicateBody("topBody", Vector2(ZONE_WIDTH,0))
 	else:
 		if rightBody:
-			rightBody.queue_free()
+			$rightBody.queue_free()
 	# create left-clone if a screen away from the right
 	if TooCloseToRight(parent.position.x, parent.position.y):
 		if not leftBody:
-			duplicateBody("leftBody", $primaryBody.position.x - ZONE_WIDTH, null)
+			duplicateBody("topBody", Vector2(-ZONE_WIDTH,0))
 	else:
 		if leftBody:
-			leftBody.queue_free()
+			$leftBody.queue_free()
 	# create top right clone
 	if TooCloseToBottom(parent.position.x, parent.position.y) && TooCloseToLeft(parent.position.x, parent.position.y):
 		if not diagTopRightBody:
-			duplicateBody("diagTopRightBody", $primaryBody.position.x + ZONE_WIDTH, $primaryBody.position.y - ZONE_HEIGHT)
+			duplicateBody("topBody", Vector2(ZONE_WIDTH,-ZONE_HEIGHT))
 	else:
 		if diagTopRightBody:
-			diagTopRightBody.queue_free()
+			$diagTopRightBody.queue_free()
 	# create top left clone
 	if TooCloseToBottom(parent.position.x, parent.position.y) && TooCloseToRight(parent.position.x, parent.position.y):
 		if not diagTopLeftBody:
-			duplicateBody("diagTopLeftBody", $primaryBody.position.x - ZONE_WIDTH, $primaryBody.position.y - ZONE_HEIGHT)
+			duplicateBody("topBody", Vector2(-ZONE_WIDTH,-ZONE_HEIGHT))
 	else:
 		if diagTopLeftBody:
-			diagTopLeftBody.queue_free()
+			$diagTopLeftBody.queue_free()
 	# create bottom left clone
 	if TooCloseToTop(parent.position.x, parent.position.y) && TooCloseToRight(parent.position.x, parent.position.y):
 		if not diagBottomLeftBody:
-			duplicateBody("diagBottomLeftBody", $primaryBody.position.x - ZONE_WIDTH, $primaryBody.position.y + ZONE_HEIGHT)
+			duplicateBody("topBody", Vector2(-ZONE_WIDTH,ZONE_HEIGHT))
 	else:
 		if diagBottomLeftBody:
-			diagBottomLeftBody.queue_free()
+			$diagBottomLeftBody.queue_free()
 	# create bottom right clone
 	if TooCloseToTop(parent.position.x, parent.position.y) && TooCloseToLeft(parent.position.x, parent.position.y):
 		if not diagBottomRightBody:
-			duplicateBody("diagBottomRightBody", $primaryBody.position.x + ZONE_WIDTH, $primaryBody.position.y + ZONE_HEIGHT)
+			duplicateBody("topBody", Vector2(ZONE_WIDTH,ZONE_HEIGHT))
 	else:
 		if diagBottomRightBody:
-			diagBottomRightBody.queue_free()
+			$diagBottomRightBody.queue_free()
 
-func duplicateBody(newBodyName: String, x = null, y = null):
+func duplicateBody(newBodyName: String, offset: Vector2):
 	var newBody = $primaryBody.duplicate()
 	newBody.name = newBodyName
-	#print(newBodyName + " X " + str(newBody.position.x) + " -> " + str(x) + " Y " + str(newBody.position.y) + " -> " + str(y))
-	if x != null:
-		newBody.position.x = x
-	if y != null:
-		newBody.position.y = y
-	add_child(newBody);
+	newBody.position += offset
+	add_child(newBody)
 	
 func TooCloseToBottom(x: int, y: int):
-	return y > ZONE_HEIGHT / 2 - get_viewport_rect().size.y
+	if y > ZONE_HEIGHT / 2 - get_viewport_rect().size.y:
+		#print("bottom")
+		return true
+	return false
 func TooCloseToTop(x: int, y: int):
-	return y < -ZONE_HEIGHT / 2 + get_viewport_rect().size.y
+	if y < -ZONE_HEIGHT / 2 + get_viewport_rect().size.y:
+		#print("top")
+		return true
+	return false
 func TooCloseToLeft(x: int, y: int):
-	return x < ZONE_WIDTH / 2 - get_viewport_rect().size.x
+	if x > ZONE_WIDTH / 2 - get_viewport_rect().size.x:
+		#print("left")
+		return true
+	return false
 func TooCloseToRight(x: int, y: int):
-	return x > -ZONE_WIDTH / 2 + get_viewport_rect().size.x
+	if x < -ZONE_WIDTH / 2 + get_viewport_rect().size.x:
+		#print("right")
+		return true
+	return false

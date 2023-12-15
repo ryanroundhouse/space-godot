@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cirddyxholu5u"]
+
+[ext_resource type="Script" path="res://actors/obstacles/asteroid.gd" id="1_8lcq6"]
+[ext_resource type="Texture2D" uid="uid://dfyc8iy36bl5j" path="res://assets/obstacles/asteroid1.png" id="1_k3lha"]
+[ext_resource type="Script" path="res://actors/shared/duplicateOnEdge.gd" id="1_uhl5b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ie8as"]
+radius = 9.0
+
+[node name="Asteroid" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_8lcq6")
+
+[node name="DuplicateOnEdges" type="Node2D" parent="."]
+script = ExtResource("1_uhl5b")
+
+[node name="primaryBody" type="Node2D" parent="DuplicateOnEdges"]
+
+[node name="MainSprite" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_k3lha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ie8as")
