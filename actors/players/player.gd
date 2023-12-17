@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var acceleration := 50.0
-@export var max_speed := 850.0
+@export var max_speed := 950.0
 @export var rotation_speed := 250.0
 
 func _physics_process(delta):

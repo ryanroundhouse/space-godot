@@ -1,20 +1,39 @@
 extends Node2D
 
+var TopDupeBoundary : int
+var BottomDupeBoundary : int
+var LeftDupeBoundary : int
+var RightDupeBoundary : int
+
 func _ready():
 	$primaryBody.connect("primaryBodyWarped", onPrimaryBodyWarped)
+	
+	TopDupeBoundary = getTopDupeBoundary()
+	BottomDupeBoundary = getBottomDupeBoundary()
+	LeftDupeBoundary = getLeftDupeBoundary()
+	RightDupeBoundary = getRightDupeBoundary()
+	print("Duping boundaries for asteroid ", get_parent().id)
+	print("Top dupe at y = " + str(TopDupeBoundary))
+	print("Bottom dupe at y = " + str(BottomDupeBoundary))
+	print("Left dupe at y = " + str(LeftDupeBoundary))
+	print("Right dupe at y = " + str(RightDupeBoundary))
+	
+func getTopDupeBoundary():
+	var zone = find_parent("Zone")
+	return -zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y
+func getBottomDupeBoundary():
+	var zone = find_parent("Zone")
+	return zone.ZONE_HEIGHT / 2 - zone.VIEW_DISTANCE.y
+func getLeftDupeBoundary():
+	var zone = find_parent("Zone")
+	return zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x
+func getRightDupeBoundary():
+	var zone = find_parent("Zone")
+	return -zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x
+	
 
 func onPrimaryBodyWarped():
 	var primaryBody = find_child("primaryBody")
-	
-	## if any cardinal directions exist, just re-set them
-	#if has_node("topBody"):
-		#$topBody.position.x = primaryBody.position.x
-	#if has_node("bottomBody"):
-		#$bottomBody.position.x = primaryBody.position.x
-	#if has_node("leftBody"):
-		#$leftBody.position.y = primaryBody.position.y
-	#if has_node("rightBody"):
-		#$rightBody.position.y = primaryBody.position.y
 		
 	if has_node("topBody"):
 		$topBody.queue_free()
@@ -115,6 +134,9 @@ func duplicateIfNecessary():
 
 func duplicateBody(newBodyName: String, offset: Vector2):
 	var newBody = $primaryBody.duplicate()
+
+	#print("duping from " + newBody.name + " at y = " + str(newBody.position.y))
+	
 	newBody.name = newBodyName
 	newBody.position += offset
 	newBody.isPrimary = false
@@ -122,33 +144,37 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	#var mainSprite = newBody.get_node("MainSprite")
 	#mainSprite.scale = Vector2(0.05,0.05)
 	
-	#print("duping to " + newBodyName)
+	#print("duping to " + newBody.name + " at y = " + str(newBody.position.y))
 	add_child(newBody)
+
+	#var zone = find_parent("Zone")
+	#print("Duping boundaries: ")
+	#print("Top dupe at y = " + str(-zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y))
+	#print("Bottom dupe at y = " + str(zone.ZONE_HEIGHT / 2 - zone.VIEW_DISTANCE.y))
+	#print("Left dupe at y = " + str(zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x))
+	#print("Right dupe at y = " + str(-zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x))
+	
 	
 func TooCloseToBottom(position: Vector2):
-	var zone = find_parent("Zone")
-	var limit = zone.ZONE_HEIGHT / 2 - zone.VIEW_DISTANCE.y
+	var limit = BottomDupeBoundary
 	if position.y >= limit:
 		#print("bottom: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToTop(position: Vector2):
-	var zone = find_parent("Zone")
-	var limit = -zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y
+	var limit = TopDupeBoundary
 	if position.y <= limit:
 		#print("top: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToLeft(position: Vector2):
-	var zone = find_parent("Zone")
-	var limit = zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x
+	var limit = LeftDupeBoundary
 	if position.x >= limit:
 		#print("left: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToRight(position: Vector2):
-	var zone = find_parent("Zone")
-	var limit = -zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x
+	var limit = RightDupeBoundary
 	if position.x <= limit:
 		#print("right: " + str(position.x) + " vs " + str(limit))
 		return true

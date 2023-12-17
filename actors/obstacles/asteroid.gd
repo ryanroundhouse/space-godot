@@ -1,6 +1,8 @@
 extends Node2D
 
-func initialize(position: Vector2, direction: Vector2, rotation_speed: int, scale: Vector2):
+@export var id := 0
+
+func initialize(position: Vector2, direction: Vector2, rotation_speed: int, scale: Vector2, identifier: int):
 	var primaryBody = find_child("primaryBody")
 	primaryBody.position = position
 	primaryBody.direction = direction
@@ -11,3 +13,5 @@ func initialize(position: Vector2, direction: Vector2, rotation_speed: int, scal
 	mainSprite.scale *= scale;
 	var collision = find_child("CollisionShape2D")
 	collision.scale *= scale;
+	
+	id = identifier

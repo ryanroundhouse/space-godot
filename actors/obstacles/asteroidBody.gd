@@ -9,12 +9,18 @@ var isPrimary := false
 
 func _ready():
 	connect("body_entered", _on_body_entered)
+	connect("area_entered", _on_area_entered)
+
+func _on_area_entered(area):
+	#print("Entered area: ", area.name)
+	var normal = calculate_collision_normal(area)
+	direction = -normal
 
 func _on_body_entered(body):
-	print("Entered: ", body.name)
+	#print("Entered body: ", body.name)
 	var normal = calculate_collision_normal(body)
 	print("normal: (" + str(normal.x) + "," + str(normal.y) + ")")
-	body.velocity = normal
+	#body.velocity = normal
 	direction = -normal
 
 func calculate_collision_normal(area):
