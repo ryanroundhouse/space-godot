@@ -1,8 +1,40 @@
 extends Node2D
 
-var ZONE_WIDTH := 5120
-var ZONE_HEIGHT := 5120
+func _ready():
+	$primaryBody.connect("primaryBodyWarped", onPrimaryBodyWarped)
 
+func onPrimaryBodyWarped():
+	var primaryBody = find_child("primaryBody")
+	
+	## if any cardinal directions exist, just re-set them
+	#if has_node("topBody"):
+		#$topBody.position.x = primaryBody.position.x
+	#if has_node("bottomBody"):
+		#$bottomBody.position.x = primaryBody.position.x
+	#if has_node("leftBody"):
+		#$leftBody.position.y = primaryBody.position.y
+	#if has_node("rightBody"):
+		#$rightBody.position.y = primaryBody.position.y
+		
+	if has_node("topBody"):
+		$topBody.queue_free()
+	if has_node("bottomBody"):
+		$bottomBody.queue_free()
+	if has_node("leftBody"):
+		$leftBody.queue_free()
+	if has_node("rightBody"):
+		$rightBody.queue_free()
+	if has_node("diagTopLeftBody"):
+		$diagTopLeftBody.queue_free()
+	if has_node("diagTopRightBody"):
+		$diagTopRightBody.queue_free()
+	if has_node("diagBottomLeftBody"):
+		$diagBottomLeftBody.queue_free()
+	if has_node("diagBottomRightBody"):
+		$diagBottomRightBody.queue_free()
+	
+	duplicateIfNecessary()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	duplicateIfNecessary();
@@ -17,63 +49,68 @@ func duplicateIfNecessary():
 	var diagBottomLeftBody = has_node("diagBottomLeftBody")
 	var diagBottomRightBody = has_node("diagBottomRightBody")
 	
-	var parent = get_parent()
+	var primaryBody = find_child("primaryBody")
+	var world = find_parent("World")
 	
 	#print("parent position: (" + str(parent.position.x) + "," + str(parent.position.y) + ")")
 	
-	# create top-clone if a screen away from the bottom
-	if TooCloseToBottom(parent.position.x, parent.position.y):
-		if not topBody:
-			duplicateBody("topBody", Vector2(0,-ZONE_HEIGHT))
-	else:
-		if topBody:
-			$topBody.queue_free()
 	# create bottom-clone if a screen away from the top
-	if TooCloseToTop(parent.position.x, parent.position.y):
+	if TooCloseToTop(primaryBody.position):
 		if not bottomBody:
-			duplicateBody("bottomBody", Vector2(0,ZONE_HEIGHT))
+			duplicateBody("bottomBody", Vector2(0,world.ZONE_HEIGHT))
 	else:
 		if bottomBody:
+			print("freeing bottomBody")
 			$bottomBody.queue_free()
+	# create top-clone if a screen away from the bottom
+	if TooCloseToBottom(primaryBody.position):
+		if not topBody:
+			duplicateBody("topBody", Vector2(0,-world.ZONE_HEIGHT))
+	else:
+		if topBody:
+			print("freeing topBody")
+			$topBody.queue_free()
 	# create right-clone if a screen away from the left
-	if TooCloseToLeft(parent.position.x, parent.position.y):
+	if TooCloseToLeft(primaryBody.position):
 		if not rightBody:
-			duplicateBody("topBody", Vector2(ZONE_WIDTH,0))
+			duplicateBody("rightBody", Vector2(-world.ZONE_WIDTH,0))
 	else:
 		if rightBody:
 			$rightBody.queue_free()
 	# create left-clone if a screen away from the right
-	if TooCloseToRight(parent.position.x, parent.position.y):
+	if TooCloseToRight(primaryBody.position):
 		if not leftBody:
-			duplicateBody("topBody", Vector2(-ZONE_WIDTH,0))
+			duplicateBody("leftBody", Vector2(world.ZONE_WIDTH,0))
 	else:
 		if leftBody:
 			$leftBody.queue_free()
 	# create top right clone
-	if TooCloseToBottom(parent.position.x, parent.position.y) && TooCloseToLeft(parent.position.x, parent.position.y):
+	if TooCloseToBottom(primaryBody.position) && TooCloseToRight(primaryBody.position):
 		if not diagTopRightBody:
-			duplicateBody("topBody", Vector2(ZONE_WIDTH,-ZONE_HEIGHT))
+			duplicateBody("diagTopRightBody", Vector2(world.ZONE_WIDTH,-world.ZONE_HEIGHT))
+			print("s")
 	else:
 		if diagTopRightBody:
 			$diagTopRightBody.queue_free()
 	# create top left clone
-	if TooCloseToBottom(parent.position.x, parent.position.y) && TooCloseToRight(parent.position.x, parent.position.y):
+	if TooCloseToBottom(primaryBody.position) && TooCloseToLeft(primaryBody.position):
 		if not diagTopLeftBody:
-			duplicateBody("topBody", Vector2(-ZONE_WIDTH,-ZONE_HEIGHT))
+			duplicateBody("diagTopLeftBody", Vector2(-world.ZONE_WIDTH,-world.ZONE_HEIGHT))
+			print("p")
 	else:
 		if diagTopLeftBody:
 			$diagTopLeftBody.queue_free()
 	# create bottom left clone
-	if TooCloseToTop(parent.position.x, parent.position.y) && TooCloseToRight(parent.position.x, parent.position.y):
+	if TooCloseToTop(primaryBody.position) && TooCloseToLeft(primaryBody.position):
 		if not diagBottomLeftBody:
-			duplicateBody("topBody", Vector2(-ZONE_WIDTH,ZONE_HEIGHT))
+			duplicateBody("diagBottomLeftBody", Vector2(-world.ZONE_WIDTH,world.ZONE_HEIGHT))
 	else:
 		if diagBottomLeftBody:
 			$diagBottomLeftBody.queue_free()
 	# create bottom right clone
-	if TooCloseToTop(parent.position.x, parent.position.y) && TooCloseToLeft(parent.position.x, parent.position.y):
+	if TooCloseToTop(primaryBody.position) && TooCloseToRight(primaryBody.position):
 		if not diagBottomRightBody:
-			duplicateBody("topBody", Vector2(ZONE_WIDTH,ZONE_HEIGHT))
+			duplicateBody("diagBottomRightBody", Vector2(world.ZONE_WIDTH,world.ZONE_HEIGHT))
 	else:
 		if diagBottomRightBody:
 			$diagBottomRightBody.queue_free()
@@ -82,25 +119,39 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	var newBody = $primaryBody.duplicate()
 	newBody.name = newBodyName
 	newBody.position += offset
+	newBody.isPrimary = false
+
+	#var mainSprite = newBody.get_node("MainSprite")
+	#mainSprite.scale = Vector2(0.05,0.05)
+	
+	print("duping to " + newBodyName)
 	add_child(newBody)
 	
-func TooCloseToBottom(x: int, y: int):
-	if y > ZONE_HEIGHT / 2 - get_viewport_rect().size.y:
-		#print("bottom")
+func TooCloseToBottom(position: Vector2):
+	var world = find_parent("World")
+	var limit = world.ZONE_HEIGHT / 2 - world.VIEW_DISTANCE.y
+	if position.y >= limit:
+		#print("bottom: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
-func TooCloseToTop(x: int, y: int):
-	if y < -ZONE_HEIGHT / 2 + get_viewport_rect().size.y:
-		#print("top")
+func TooCloseToTop(position: Vector2):
+	var world = find_parent("World")
+	var limit = -world.ZONE_HEIGHT / 2 + world.VIEW_DISTANCE.y
+	if position.y <= limit:
+		#print("top: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
-func TooCloseToLeft(x: int, y: int):
-	if x > ZONE_WIDTH / 2 - get_viewport_rect().size.x:
-		#print("left")
+func TooCloseToLeft(position: Vector2):
+	var world = find_parent("World")
+	var limit = world.ZONE_WIDTH / 2 - world.VIEW_DISTANCE.x
+	if position.x >= limit:
+		#print("left: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false
-func TooCloseToRight(x: int, y: int):
-	if x < -ZONE_WIDTH / 2 + get_viewport_rect().size.x:
-		#print("right")
+func TooCloseToRight(position: Vector2):
+	var world = find_parent("World")
+	var limit = -world.ZONE_WIDTH / 2 + world.VIEW_DISTANCE.x
+	if position.x <= limit:
+		#print("right: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false

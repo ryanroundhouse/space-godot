@@ -4,9 +4,6 @@ extends CharacterBody2D
 @export var max_speed := 850.0
 @export var rotation_speed := 250.0
 
-var ZONE_WIDTH := 5120
-var ZONE_HEIGHT := 5120
-
 func _physics_process(delta):
 	# determine acceleration
 	var input_vector := Vector2(0, Input.get_axis("accelerate", "descelerate"))
@@ -29,11 +26,12 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, 8)
 
 	# wrap player to opposite side of zone
-	if position.x > ZONE_WIDTH / 2:
-		position.x = -ZONE_WIDTH / 2
-	elif position.x < -ZONE_WIDTH / 2:
-		position.x = ZONE_WIDTH / 2
-	if position.y > ZONE_HEIGHT / 2:
-		position.y = -ZONE_HEIGHT / 2
-	elif position.y < -ZONE_HEIGHT / 2:
-		position.y = ZONE_HEIGHT / 2
+	var world = find_parent("World")
+	if position.x > world.ZONE_WIDTH / 2:
+		position.x = -world.ZONE_WIDTH / 2
+	elif position.x < -world.ZONE_WIDTH / 2:
+		position.x = world.ZONE_WIDTH / 2
+	if position.y > world.ZONE_HEIGHT / 2:
+		position.y = -world.ZONE_HEIGHT / 2
+	elif position.y < -world.ZONE_HEIGHT / 2:
+		position.y = world.ZONE_HEIGHT / 2
