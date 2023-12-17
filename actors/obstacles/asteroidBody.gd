@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var direction := Vector2(1,0)
+@export var rotation_speed := 1.0
 
 signal primaryBodyWarped()
 
@@ -8,6 +9,7 @@ var isPrimary := false
 
 func _physics_process(delta):
 	position += direction * delta
+	rotation += rotation_speed * delta
 	if isPrimary:
 		wrapToOtherSide()
 
