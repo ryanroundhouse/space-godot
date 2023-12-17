@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://actors/obstacles/asteroidBody.gd" id="3_81iw0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3mse"]
+radius = 11.0
 
 [node name="Asteroid" type="Node2D"]
 script = ExtResource("1_8lcq6")
