@@ -60,7 +60,7 @@ func duplicateIfNecessary():
 			duplicateBody("bottomBody", Vector2(0,world.ZONE_HEIGHT))
 	else:
 		if bottomBody:
-			print("freeing bottomBody")
+			#print("freeing bottomBody")
 			$bottomBody.queue_free()
 	# create top-clone if a screen away from the bottom
 	if TooCloseToBottom(primaryBody.position):
@@ -68,7 +68,7 @@ func duplicateIfNecessary():
 			duplicateBody("topBody", Vector2(0,-world.ZONE_HEIGHT))
 	else:
 		if topBody:
-			print("freeing topBody")
+			#print("freeing topBody")
 			$topBody.queue_free()
 	# create right-clone if a screen away from the left
 	if TooCloseToLeft(primaryBody.position):
@@ -88,7 +88,6 @@ func duplicateIfNecessary():
 	if TooCloseToBottom(primaryBody.position) && TooCloseToRight(primaryBody.position):
 		if not diagTopRightBody:
 			duplicateBody("diagTopRightBody", Vector2(world.ZONE_WIDTH,-world.ZONE_HEIGHT))
-			print("s")
 	else:
 		if diagTopRightBody:
 			$diagTopRightBody.queue_free()
@@ -96,7 +95,6 @@ func duplicateIfNecessary():
 	if TooCloseToBottom(primaryBody.position) && TooCloseToLeft(primaryBody.position):
 		if not diagTopLeftBody:
 			duplicateBody("diagTopLeftBody", Vector2(-world.ZONE_WIDTH,-world.ZONE_HEIGHT))
-			print("p")
 	else:
 		if diagTopLeftBody:
 			$diagTopLeftBody.queue_free()
@@ -124,7 +122,7 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	#var mainSprite = newBody.get_node("MainSprite")
 	#mainSprite.scale = Vector2(0.05,0.05)
 	
-	print("duping to " + newBodyName)
+	#print("duping to " + newBodyName)
 	add_child(newBody)
 	
 func TooCloseToBottom(position: Vector2):
