@@ -7,7 +7,7 @@ func _ready():
 	randomize()
 	var zone = find_parent("Zone")
 	
-	for numberOfAsteroids in range(30):
+	for numberOfAsteroids in range(130):
 		# Create a random direction (angle)
 		var directionX = (randf() * 2.0 - 1.0) * 300
 		var directionY = (randf() * 2.0 - 1.0) * 300
