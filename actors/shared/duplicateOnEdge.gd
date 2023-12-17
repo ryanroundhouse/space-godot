@@ -50,14 +50,14 @@ func duplicateIfNecessary():
 	var diagBottomRightBody = has_node("diagBottomRightBody")
 	
 	var primaryBody = find_child("primaryBody")
-	var world = find_parent("World")
+	var zone = find_parent("Zone")
 	
 	#print("parent position: (" + str(parent.position.x) + "," + str(parent.position.y) + ")")
 	
 	# create bottom-clone if a screen away from the top
 	if TooCloseToTop(primaryBody.position):
 		if not bottomBody:
-			duplicateBody("bottomBody", Vector2(0,world.ZONE_HEIGHT))
+			duplicateBody("bottomBody", Vector2(0,zone.ZONE_HEIGHT))
 	else:
 		if bottomBody:
 			#print("freeing bottomBody")
@@ -65,7 +65,7 @@ func duplicateIfNecessary():
 	# create top-clone if a screen away from the bottom
 	if TooCloseToBottom(primaryBody.position):
 		if not topBody:
-			duplicateBody("topBody", Vector2(0,-world.ZONE_HEIGHT))
+			duplicateBody("topBody", Vector2(0,-zone.ZONE_HEIGHT))
 	else:
 		if topBody:
 			#print("freeing topBody")
@@ -73,42 +73,42 @@ func duplicateIfNecessary():
 	# create right-clone if a screen away from the left
 	if TooCloseToLeft(primaryBody.position):
 		if not rightBody:
-			duplicateBody("rightBody", Vector2(-world.ZONE_WIDTH,0))
+			duplicateBody("rightBody", Vector2(-zone.ZONE_WIDTH,0))
 	else:
 		if rightBody:
 			$rightBody.queue_free()
 	# create left-clone if a screen away from the right
 	if TooCloseToRight(primaryBody.position):
 		if not leftBody:
-			duplicateBody("leftBody", Vector2(world.ZONE_WIDTH,0))
+			duplicateBody("leftBody", Vector2(zone.ZONE_WIDTH,0))
 	else:
 		if leftBody:
 			$leftBody.queue_free()
 	# create top right clone
 	if TooCloseToBottom(primaryBody.position) && TooCloseToRight(primaryBody.position):
 		if not diagTopRightBody:
-			duplicateBody("diagTopRightBody", Vector2(world.ZONE_WIDTH,-world.ZONE_HEIGHT))
+			duplicateBody("diagTopRightBody", Vector2(zone.ZONE_WIDTH,-zone.ZONE_HEIGHT))
 	else:
 		if diagTopRightBody:
 			$diagTopRightBody.queue_free()
 	# create top left clone
 	if TooCloseToBottom(primaryBody.position) && TooCloseToLeft(primaryBody.position):
 		if not diagTopLeftBody:
-			duplicateBody("diagTopLeftBody", Vector2(-world.ZONE_WIDTH,-world.ZONE_HEIGHT))
+			duplicateBody("diagTopLeftBody", Vector2(-zone.ZONE_WIDTH,-zone.ZONE_HEIGHT))
 	else:
 		if diagTopLeftBody:
 			$diagTopLeftBody.queue_free()
 	# create bottom left clone
 	if TooCloseToTop(primaryBody.position) && TooCloseToLeft(primaryBody.position):
 		if not diagBottomLeftBody:
-			duplicateBody("diagBottomLeftBody", Vector2(-world.ZONE_WIDTH,world.ZONE_HEIGHT))
+			duplicateBody("diagBottomLeftBody", Vector2(-zone.ZONE_WIDTH,zone.ZONE_HEIGHT))
 	else:
 		if diagBottomLeftBody:
 			$diagBottomLeftBody.queue_free()
 	# create bottom right clone
 	if TooCloseToTop(primaryBody.position) && TooCloseToRight(primaryBody.position):
 		if not diagBottomRightBody:
-			duplicateBody("diagBottomRightBody", Vector2(world.ZONE_WIDTH,world.ZONE_HEIGHT))
+			duplicateBody("diagBottomRightBody", Vector2(zone.ZONE_WIDTH,zone.ZONE_HEIGHT))
 	else:
 		if diagBottomRightBody:
 			$diagBottomRightBody.queue_free()
@@ -126,29 +126,29 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	add_child(newBody)
 	
 func TooCloseToBottom(position: Vector2):
-	var world = find_parent("World")
-	var limit = world.ZONE_HEIGHT / 2 - world.VIEW_DISTANCE.y
+	var zone = find_parent("Zone")
+	var limit = zone.ZONE_HEIGHT / 2 - zone.VIEW_DISTANCE.y
 	if position.y >= limit:
 		#print("bottom: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToTop(position: Vector2):
-	var world = find_parent("World")
-	var limit = -world.ZONE_HEIGHT / 2 + world.VIEW_DISTANCE.y
+	var zone = find_parent("Zone")
+	var limit = -zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y
 	if position.y <= limit:
 		#print("top: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToLeft(position: Vector2):
-	var world = find_parent("World")
-	var limit = world.ZONE_WIDTH / 2 - world.VIEW_DISTANCE.x
+	var zone = find_parent("Zone")
+	var limit = zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x
 	if position.x >= limit:
 		#print("left: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToRight(position: Vector2):
-	var world = find_parent("World")
-	var limit = -world.ZONE_WIDTH / 2 + world.VIEW_DISTANCE.x
+	var zone = find_parent("Zone")
+	var limit = -zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x
 	if position.x <= limit:
 		#print("right: " + str(position.x) + " vs " + str(limit))
 		return true

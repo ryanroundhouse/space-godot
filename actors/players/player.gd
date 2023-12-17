@@ -26,12 +26,12 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, 8)
 
 	# wrap player to opposite side of zone
-	var world = find_parent("World")
-	if position.x > world.ZONE_WIDTH / 2:
-		position.x = -world.ZONE_WIDTH / 2
-	elif position.x < -world.ZONE_WIDTH / 2:
-		position.x = world.ZONE_WIDTH / 2
-	if position.y > world.ZONE_HEIGHT / 2:
-		position.y = -world.ZONE_HEIGHT / 2
-	elif position.y < -world.ZONE_HEIGHT / 2:
-		position.y = world.ZONE_HEIGHT / 2
+	var zone = find_parent("Zone")
+	if position.x > zone.ZONE_WIDTH / 2:
+		position.x = -zone.ZONE_WIDTH / 2
+	elif position.x < -zone.ZONE_WIDTH / 2:
+		position.x = zone.ZONE_WIDTH / 2
+	if position.y > zone.ZONE_HEIGHT / 2:
+		position.y = -zone.ZONE_HEIGHT / 2
+	elif position.y < -zone.ZONE_HEIGHT / 2:
+		position.y = zone.ZONE_HEIGHT / 2

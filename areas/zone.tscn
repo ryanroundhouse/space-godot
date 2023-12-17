@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxc0pof5kqnv1"]
+
+[ext_resource type="Script" path="res://areas/zone.gd" id="1_lugiv"]
+[ext_resource type="Texture2D" uid="uid://ba07h5ntgv7fy" path="res://assets/background/space1.jpg" id="1_s1v41"]
+
+[node name="Zone" type="Node2D"]
+script = ExtResource("1_lugiv")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_s1v41")
+region_enabled = true
+region_rect = Rect2(0, 0, 8960, 8960)

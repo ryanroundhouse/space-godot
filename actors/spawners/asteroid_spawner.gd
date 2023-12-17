@@ -5,14 +5,14 @@ var asteroid_scene = preload("res://actors/obstacles/asteroid.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	var world = find_parent("World")
+	var zone = find_parent("Zone")
 	
 	for numberOfAsteroids in range(30):
 		# Create a random direction (angle)
 		var directionX = (randf() * 2.0 - 1.0) * 300
 		var directionY = (randf() * 2.0 - 1.0) * 300
 		
-		var asteroid_position = Vector2(randi_range(-world.ZONE_WIDTH,world.ZONE_WIDTH), randi_range(-world.ZONE_HEIGHT,world.ZONE_HEIGHT))
+		var asteroid_position = Vector2(randi_range(-zone.ZONE_WIDTH,zone.ZONE_WIDTH), randi_range(-zone.ZONE_HEIGHT,zone.ZONE_HEIGHT))
 		var direction = Vector2(directionX, directionY)
 		
 		var asteroid = asteroid_scene.instantiate() 

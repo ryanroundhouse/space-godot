@@ -12,16 +12,16 @@ func _physics_process(delta):
 		wrapToOtherSide()
 
 func wrapToOtherSide():
-	var world = find_parent("World")
-	if position.x >= world.ZONE_WIDTH / 2:
-		position.x = -world.ZONE_WIDTH / 2
+	var zone = find_parent("Zone")
+	if position.x >= zone.ZONE_WIDTH / 2:
+		position.x = -zone.ZONE_WIDTH / 2
 		emit_signal("primaryBodyWarped")
-	elif position.x <= -world.ZONE_WIDTH / 2:
-		position.x = world.ZONE_WIDTH / 2
+	elif position.x <= -zone.ZONE_WIDTH / 2:
+		position.x = zone.ZONE_WIDTH / 2
 		emit_signal("primaryBodyWarped")
-	if position.y >= world.ZONE_HEIGHT / 2:
-		position.y = -world.ZONE_HEIGHT / 2
+	if position.y >= zone.ZONE_HEIGHT / 2:
+		position.y = -zone.ZONE_HEIGHT / 2
 		emit_signal("primaryBodyWarped")
-	elif position.y <= -world.ZONE_HEIGHT / 2:
-		position.y = world.ZONE_HEIGHT / 2
+	elif position.y <= -zone.ZONE_HEIGHT / 2:
+		position.y = zone.ZONE_HEIGHT / 2
 		emit_signal("primaryBodyWarped")

@@ -1,25 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://chlw0bch6bsxd"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_rjqit"]
-[ext_resource type="Texture2D" uid="uid://ba07h5ntgv7fy" path="res://assets/background/space1.jpg" id="1_ucbqw"]
+[ext_resource type="PackedScene" uid="uid://cxc0pof5kqnv1" path="res://areas/zone.tscn" id="2_1cvlq"]
 [ext_resource type="PackedScene" uid="uid://cy05gcnlm3mg7" path="res://actors/players/player.tscn" id="2_p8bww"]
 [ext_resource type="PackedScene" uid="uid://cbnvfavnl62a" path="res://actors/spawners/asteroid_spawner.tscn" id="4_aq2gw"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_rjqit")
 
-[node name="Background" type="Sprite2D" parent="."]
-texture_repeat = 2
-texture = ExtResource("1_ucbqw")
-region_enabled = true
-region_rect = Rect2(0, 0, 8960, 8960)
+[node name="Zone" parent="." instance=ExtResource("2_1cvlq")]
 
-[node name="Player" parent="." instance=ExtResource("2_p8bww")]
+[node name="Player" parent="Zone" instance=ExtResource("2_p8bww")]
 
-[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Zone/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="AsteroidSpawner" parent="Zone" instance=ExtResource("4_aq2gw")]
+position = Vector2(0, 26)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="AsteroidSpawner" parent="." instance=ExtResource("4_aq2gw")]
-position = Vector2(0, 26)
