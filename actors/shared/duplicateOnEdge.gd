@@ -103,10 +103,11 @@ func duplicateIfNecessary():
 
 func duplicateBody(newBodyName: String, offset: Vector2):
 	var primaryBody = find_child("primaryBody")
-	var newArea = preload("res://actors/shared/duplicateProperties.gd").new()
+	#var newArea = preload("res://actors/shared/duplicateProperties.gd").new()
+	var newArea = primaryBody.duplicate()
 	newArea.name = newBodyName
 	newArea.duplicate_offset = offset
-	newArea.position += primaryBody.position + offset
+	newArea.position = primaryBody.position + offset
 	if get_parent() is RigidBody2D:
 		newArea.rotation = primaryBody.angular_velocity
 

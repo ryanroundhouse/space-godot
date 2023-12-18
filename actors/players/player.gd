@@ -18,7 +18,7 @@ func _process(delta):
 
 func fire_laser():
 	var laser = laser_scene.instantiate()
-	laser.initialize(self.position, self.rotation)
+	laser.initialize(self.position + Vector2(0,-20).rotated(rotation), self.rotation)
 	get_parent().add_child(laser)
 
 func _physics_process(delta):

@@ -7,6 +7,7 @@ signal primaryBodyWarped()
 signal blowUp()
 
 var isPrimary := false
+var duplicate_offset: Vector2
 
 func _ready():
 	connect("body_entered", _on_body_entered)
