@@ -20,6 +20,13 @@ func _physics_process(delta):
 	
 	# move
 	move_and_slide()
+	
+	for collisionIndex in get_slide_collision_count():
+		var collisionSubject = get_slide_collision(collisionIndex)
+		if collisionSubject.get_collider() is RigidBody2D:
+			collisionSubject.get_collider().apply_central_impulse(-collisionSubject.get_normal() * 10)
+			velocity += collisionSubject.get_normal() * 10
+			print("blasting")
 
 	# slow down if not moving faster
 	if input_vector.y == 0:

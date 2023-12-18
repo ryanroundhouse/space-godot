@@ -114,16 +114,21 @@ func duplicateIfNecessary():
 			$diagBottomRightBody.queue_free()
 
 func duplicateBody(newBodyName: String, offset: Vector2):
-	var newBody = $primaryBody.duplicate()
-	newBody.name = newBodyName
-	newBody.position += offset
-	newBody.isPrimary = false
+	var primaryBody = find_child("primaryBody")
+	var newArea = preload("res://actors/shared/duplicateProperties.gd").new()
+	newArea.name = newBodyName
+	newArea.asteroid_offset = offset
+	newArea.position += primaryBody.position + offset
+	newArea.rotation = primaryBody.angular_velocity
 
-	#var mainSprite = newBody.get_node("MainSprite")
-	#mainSprite.scale = Vector2(0.05,0.05)
+	var asteroidCollision = find_child("AsteroidCollisionShape").duplicate()
+	newArea.add_child(asteroidCollision)
+	var mainSprite = find_child("MainSprite").duplicate()
+	newArea.add_child(mainSprite)
 	
-	#print("duping to " + newBodyName)
-	add_child(newBody)
+	print("adding " + newBodyName + " at (" + str(newArea.position.x) + "," + str(newArea.position.y) + ")")
+	
+	add_child(newArea)
 	
 func TooCloseToBottom(position: Vector2):
 	var zone = find_parent("Zone")

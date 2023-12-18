@@ -11,6 +11,7 @@ script = ExtResource("1_rjqit")
 [node name="Zone" parent="." instance=ExtResource("2_1cvlq")]
 
 [node name="Player" parent="Zone" instance=ExtResource("2_p8bww")]
+collision_mask = 2
 
 [node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Zone/Player"]
 remote_path = NodePath("../../../Camera2D")

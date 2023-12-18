@@ -6,22 +6,31 @@ var asteroid_scene = preload("res://actors/obstacles/asteroid.tscn")
 func _ready():
 	randomize()
 	var zone = find_parent("Zone")
-	
-	for numberOfAsteroids in range(130):
+	#
+	for numberOfAsteroids in range(80):
 		# Create a random direction (angle)
-		var directionX = (randf() * 2.0 - 1.0) * 300
-		var directionY = (randf() * 2.0 - 1.0) * 300
-		var rotationSpeed = randf_range(-3.0, 3.0)
+		var directionX = (randf() * 2.0 - 1.0) * 250
+		var directionY = (randf() * 2.0 - 1.0) * 250
+		var angular_velocity = randf_range(-3.0, 3.0)
 		var scaleAmount = randi_range(1, 3)
-		var scale = Vector2(scaleAmount, scaleAmount)
+		#var scale = Vector2(scaleAmount, scaleAmount)
 		
 		var asteroid_position = Vector2(randi_range(-zone.ZONE_WIDTH,zone.ZONE_WIDTH), randi_range(-zone.ZONE_HEIGHT,zone.ZONE_HEIGHT))
-		var direction = Vector2(directionX, directionY)
+		var linear_velocity = Vector2(directionX, directionY)
 		
 		var asteroid = asteroid_scene.instantiate() 
-		asteroid.initialize(asteroid_position, direction, rotationSpeed, scale)
+		asteroid.initialize(asteroid_position, linear_velocity, angular_velocity, scaleAmount)
 		add_child(asteroid)
-		print("spawned asteroid at (" + str(asteroid.position.x) + "," + str(asteroid.position.y) + ") with direction (" + str(directionX) + "," + str(directionY) + ") and rotation speed: " + str(rotationSpeed))
+		print("spawned asteroid at (" + str(asteroid.position.x) + "," + str(asteroid.position.y) + ") with linear_velocity (" + str(directionX) + "," + str(directionY) + ") and angular_velocity: " + str(angular_velocity))
+		
+	#var position = Vector2(0,350)
+	#var linear_velocity = Vector2(150,38)
+	#var angular_velocity = 0.0
+	#var scale = 1.0
+	#
+	#var asteroid = asteroid_scene.instantiate() 
+	#asteroid.initialize(position, linear_velocity, angular_velocity, scale)
+	#add_child(asteroid)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
