@@ -4,6 +4,23 @@ extends CharacterBody2D
 @export var max_speed := 850.0
 @export var rotation_speed := 250.0
 
+var fire_delay = 0.2
+var last_fire = 0
+
+var laser_scene = preload("res://actors/weapons/red_laser.tscn")
+
+func _process(delta):
+	if Input.is_key_pressed(KEY_CTRL) && last_fire > fire_delay:
+		fire_laser()
+		last_fire = 0
+	else:
+		last_fire += delta
+
+func fire_laser():
+	var laser = laser_scene.instantiate()
+	laser.initialize(self.position, self.rotation)
+	get_parent().add_child(laser)
+
 func _physics_process(delta):
 	# determine acceleration
 	var input_vector := Vector2(0, Input.get_axis("accelerate", "descelerate"))
@@ -24,8 +41,8 @@ func _physics_process(delta):
 	for collisionIndex in get_slide_collision_count():
 		var collisionSubject = get_slide_collision(collisionIndex)
 		if collisionSubject.get_collider() is RigidBody2D:
-			collisionSubject.get_collider().apply_central_impulse(-collisionSubject.get_normal() * 10)
-			velocity += collisionSubject.get_normal() * 10
+			collisionSubject.get_collider().apply_central_impulse(-collisionSubject.get_normal() * 100)
+			velocity += collisionSubject.get_normal() * 100
 			print("blasting")
 
 	# slow down if not moving faster

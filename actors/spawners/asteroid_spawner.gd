@@ -6,17 +6,17 @@ var asteroid_scene = preload("res://actors/obstacles/asteroid.tscn")
 func _ready():
 	randomize()
 	#
-	for numberOfAsteroids in range(80):
+	for numberOfAsteroids in range(5):
 		spawnRandomAsteroid()
 		
-	#var position = Vector2(0,350)
-	#var linear_velocity = Vector2(150,38)
-	#var angular_velocity = 0.0
-	#var scale = 1.0
-	#
-	#var asteroid = asteroid_scene.instantiate() 
-	#asteroid.initialize(position, linear_velocity, angular_velocity, scale)
-	#add_child(asteroid)
+	var position = Vector2(50,-80)
+	var linear_velocity = Vector2(0,0)
+	var angular_velocity = 0.0
+	var scale = 1.0
+	
+	var asteroid = asteroid_scene.instantiate() 
+	asteroid.initialize(position, linear_velocity, angular_velocity, scale)
+	add_child(asteroid)
 
 func spawnRandomAsteroid():
 	var zone = find_parent("Zone")

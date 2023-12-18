@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbldu8o4mv7m2"]
+
+[ext_resource type="Texture2D" uid="uid://nf2stqu5t1o" path="res://assets/weapons/redlaser.png" id="1_pu7ed"]
+[ext_resource type="Script" path="res://actors/weapons/red_laser.gd" id="1_wyn87"]
+[ext_resource type="Script" path="res://actors/weapons/red_laser_body.gd" id="2_ofmg2"]
+[ext_resource type="Script" path="res://actors/shared/duplicateOnEdge.gd" id="2_yfc0f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4va5w"]
+size = Vector2(2, 10)
+
+[node name="RedLaser" type="Node2D"]
+script = ExtResource("1_wyn87")
+
+[node name="DuplicateOnEdges" type="Node2D" parent="."]
+script = ExtResource("2_yfc0f")
+
+[node name="primaryBody" type="Area2D" parent="DuplicateOnEdges"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("2_ofmg2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_4va5w")
+
+[node name="MainSprite" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
+position = Vector2(0.4, 0)
+rotation = 1.5708
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_pu7ed")
+
+[connection signal="body_entered" from="DuplicateOnEdges/primaryBody" to="DuplicateOnEdges/primaryBody" method="_on_body_entered"]

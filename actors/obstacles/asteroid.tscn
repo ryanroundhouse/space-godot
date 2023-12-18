@@ -19,11 +19,13 @@ collision_layer = 2
 collision_mask = 3
 mass = 1000.0
 gravity_scale = 0.0
+max_contacts_reported = 5
+contact_monitor = true
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("3_81iw0")
 
-[node name="AsteroidCollisionShape" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
+[node name="CollisionShape" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
 shape = SubResource("CircleShape2D_a3mse")
 
 [node name="MainSprite" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]

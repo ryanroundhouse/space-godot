@@ -3,19 +3,7 @@ extends Node2D
 func _ready():
 	$primaryBody.connect("primaryBodyWarped", onPrimaryBodyWarped)
 
-func onPrimaryBodyWarped():
-	var primaryBody = find_child("primaryBody")
-	
-	## if any cardinal directions exist, just re-set them
-	#if has_node("topBody"):
-		#$topBody.position.x = primaryBody.position.x
-	#if has_node("bottomBody"):
-		#$bottomBody.position.x = primaryBody.position.x
-	#if has_node("leftBody"):
-		#$leftBody.position.y = primaryBody.position.y
-	#if has_node("rightBody"):
-		#$rightBody.position.y = primaryBody.position.y
-		
+func onPrimaryBodyWarped():		
 	if has_node("topBody"):
 		$topBody.queue_free()
 	if has_node("bottomBody"):
@@ -48,7 +36,7 @@ func duplicateIfNecessary():
 	var diagTopRightBody = has_node("diagTopRightBody")
 	var diagBottomLeftBody = has_node("diagBottomLeftBody")
 	var diagBottomRightBody = has_node("diagBottomRightBody")
-	
+		
 	var primaryBody = find_child("primaryBody")
 	var zone = find_parent("Zone")
 	
@@ -117,44 +105,45 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	var primaryBody = find_child("primaryBody")
 	var newArea = preload("res://actors/shared/duplicateProperties.gd").new()
 	newArea.name = newBodyName
-	newArea.asteroid_offset = offset
+	newArea.duplicate_offset = offset
 	newArea.position += primaryBody.position + offset
-	newArea.rotation = primaryBody.angular_velocity
+	if get_parent() is RigidBody2D:
+		newArea.rotation = primaryBody.angular_velocity
 
-	var asteroidCollision = find_child("AsteroidCollisionShape").duplicate()
+	var asteroidCollision = find_child("CollisionShape").duplicate()
 	newArea.add_child(asteroidCollision)
 	var mainSprite = find_child("MainSprite").duplicate()
 	newArea.add_child(mainSprite)
 	
-	print("adding " + newBodyName + " at (" + str(newArea.position.x) + "," + str(newArea.position.y) + ")")
+	#print("adding " + newBodyName + " at (" + str(newArea.position.x) + "," + str(newArea.position.y) + ")")
 	
 	add_child(newArea)
 	
-func TooCloseToBottom(position: Vector2):
+func TooCloseToBottom(initial_position: Vector2):
 	var zone = find_parent("Zone")
 	var limit = zone.ZONE_HEIGHT / 2 - zone.VIEW_DISTANCE.y
-	if position.y >= limit:
+	if initial_position.y >= limit:
 		#print("bottom: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
-func TooCloseToTop(position: Vector2):
+func TooCloseToTop(initial_position: Vector2):
 	var zone = find_parent("Zone")
 	var limit = -zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y
-	if position.y <= limit:
+	if initial_position.y <= limit:
 		#print("top: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
-func TooCloseToLeft(position: Vector2):
+func TooCloseToLeft(initial_position: Vector2):
 	var zone = find_parent("Zone")
 	var limit = zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x
-	if position.x >= limit:
+	if initial_position.x >= limit:
 		#print("left: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false
-func TooCloseToRight(position: Vector2):
+func TooCloseToRight(initial_position: Vector2):
 	var zone = find_parent("Zone")
 	var limit = -zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x
-	if position.x <= limit:
+	if initial_position.x <= limit:
 		#print("right: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false
