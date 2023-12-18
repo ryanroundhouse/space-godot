@@ -1,12 +1,13 @@
 extends Node2D
 
 var asteroid_scene = preload("res://actors/obstacles/asteroid.tscn")
+@export var number_of_asteroids := 35
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	#
-	#for numberOfAsteroids in range(5):
+	#for numberOfAsteroids in range(number_of_asteroids):
 		#spawnRandomAsteroid()
 		
 	var position = Vector2(50,-300)
@@ -36,5 +37,9 @@ func spawnRandomAsteroid():
 
 
 func _process(delta):
+	
+	if get_child_count() < number_of_asteroids:
+		spawnRandomAsteroid()
+	
 	if Input.is_key_pressed(KEY_P):
 		spawnRandomAsteroid()

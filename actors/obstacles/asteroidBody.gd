@@ -9,15 +9,15 @@ signal blowUp()
 var isPrimary := false
 var duplicate_offset: Vector2
 
-func _ready():
-	connect("body_entered", _on_body_entered)
+#func _ready():
+	#connect("body_entered", _on_body_entered)
 
 
-func _on_body_entered(body):
-	print("Entered: ", body.name)
+#func _on_body_entered(body):
+	#print("Entered: ", body.name)
 
 func damage(weapon):
-	print("I should blow up")
+	#print("I should blow up")
 	emit_signal("blowUp", position)
 
 func _integrate_forces(state):

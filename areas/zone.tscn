@@ -10,4 +10,4 @@ script = ExtResource("1_lugiv")
 texture_repeat = 2
 texture = ExtResource("1_s1v41")
 region_enabled = true
-region_rect = Rect2(0, 0, 800, 800)
+region_rect = Rect2(0, 0, 8960, 8960)
