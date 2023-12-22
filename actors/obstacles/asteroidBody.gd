@@ -18,7 +18,7 @@ var duplicate_offset: Vector2
 
 func damage(weapon):
 	#print("I should blow up")
-	emit_signal("blowUp", position)
+	emit_signal("blowUp")
 
 func _process(delta):
 	var label = get_node("Label") as Label

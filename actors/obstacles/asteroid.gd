@@ -6,11 +6,12 @@ var death_particle_scene = preload("res://actors/obstacles/asteroid_explosion.ts
 func _ready():
 	find_child("primaryBody").connect("blowUp", onBlowUp)
 
-func onBlowUp(explosion_position):
-	var death_particle = death_particle_scene.instantiate()
-	death_particle.position = explosion_position
-	death_particle.emitting = true
-	get_tree().current_scene.add_child(death_particle)
+func onBlowUp():
+	for child in find_child("DuplicateOnEdges").get_children():
+		var death_particle = death_particle_scene.instantiate()
+		death_particle.position = child.position
+		death_particle.emitting = true
+		get_tree().current_scene.add_child(death_particle)
 	
 	queue_free()
 
