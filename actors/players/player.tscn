@@ -10,9 +10,13 @@ radius = 16.2788
 collision_mask = 3
 script = ExtResource("1_s6jow")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4a4cb")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_igpf8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_4a4cb")
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

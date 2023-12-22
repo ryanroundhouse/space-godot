@@ -10,11 +10,14 @@ var last_fire = 0
 var laser_scene = preload("res://actors/weapons/red_laser.tscn")
 
 func _process(delta):
-	if Input.is_action_pressed("shoot") && last_fire > fire_delay:
+	if Input.is_action_pressed("shoot"):# && last_fire > fire_delay:
 		fire_laser()
 		last_fire = 0
 	else:
 		last_fire += delta
+	var label = get_node("Label") as Label
+	label.rotation = -rotation
+	label.text = "Pos: %s" % position
 
 func fire_laser():
 	var laser = laser_scene.instantiate()

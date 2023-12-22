@@ -20,20 +20,34 @@ func damage(weapon):
 	#print("I should blow up")
 	emit_signal("blowUp", position)
 
+func _process(delta):
+	var label = get_node("Label") as Label
+	label.rotation = -rotation
+	label.text = "Pos: %s" % position
+
 func _integrate_forces(state):
-	wrapToOtherSide()
+	if isPrimary:
+		wrapToOtherSide()
 
 func wrapToOtherSide():
 	var zone = find_parent("Zone")
 	if position.x >= zone.ZONE_WIDTH / 2:
+		print("wrap left position was %s" % position)
 		position.x = -zone.ZONE_WIDTH / 2
+		print("wrap left position is now %s" % position)
 		emit_signal("primaryBodyWarped")
 	elif position.x <= -zone.ZONE_WIDTH / 2:
+		print("wrap right position was %s" % position)
 		position.x = zone.ZONE_WIDTH / 2
+		print("wrap right position is now %s" % position)
 		emit_signal("primaryBodyWarped")
 	if position.y >= zone.ZONE_HEIGHT / 2:
+		print("wrap top position was %s" % position)
 		position.y = -zone.ZONE_HEIGHT / 2
+		print("wrap top position is now %s" % position)
 		emit_signal("primaryBodyWarped")
 	elif position.y <= -zone.ZONE_HEIGHT / 2:
+		print("wrap bottom position was %s" % position)
 		position.y = zone.ZONE_HEIGHT / 2
+		print("wrap bottom position is now %s" % position)
 		emit_signal("primaryBodyWarped")

@@ -10,14 +10,14 @@ func _ready():
 	#for numberOfAsteroids in range(number_of_asteroids):
 		#spawnRandomAsteroid()
 		
-	var position = Vector2(50,-300)
-	var linear_velocity = Vector2(0,-30)
-	var angular_velocity = 0.0
-	var scale = 1.0
-	
-	var asteroid = asteroid_scene.instantiate() 
-	asteroid.initialize(position, linear_velocity, angular_velocity, scale)
-	add_child(asteroid)
+	#var position = Vector2(50,-300)
+	#var linear_velocity = Vector2(0,-30)
+	#var angular_velocity = 0.0
+	#var scale = 1.0
+	#
+	#var asteroid = asteroid_scene.instantiate() 
+	#asteroid.initialize(position, linear_velocity, angular_velocity, scale)
+	#add_child(asteroid)
 
 func spawnRandomAsteroid():
 	var zone = find_parent("Zone")

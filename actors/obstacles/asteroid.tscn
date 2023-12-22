@@ -31,3 +31,7 @@ shape = SubResource("CircleShape2D_a3mse")
 [node name="MainSprite" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("1_k3lha")
+
+[node name="Label" type="Label" parent="DuplicateOnEdges/primaryBody"]
+offset_right = 40.0
+offset_bottom = 23.0

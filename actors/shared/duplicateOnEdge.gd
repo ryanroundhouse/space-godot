@@ -1,7 +1,18 @@
 extends Node2D
 
+var BOTTOM_LIMIT: int
+var TOP_LIMIT: int
+var LEFT_LIMIT: int
+var RIGHT_LIMIT: int
+
 func _ready():
 	$primaryBody.connect("primaryBodyWarped", onPrimaryBodyWarped)
+	
+	var zone = find_parent("Zone")
+	BOTTOM_LIMIT = zone.ZONE_HEIGHT / 2 - zone.VIEW_DISTANCE.y
+	TOP_LIMIT = -zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y
+	LEFT_LIMIT = zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x
+	RIGHT_LIMIT = -zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x
 
 func onPrimaryBodyWarped():		
 	if has_node("topBody"):
@@ -107,44 +118,41 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	var newArea = primaryBody.duplicate()
 	newArea.name = newBodyName
 	newArea.duplicate_offset = offset
-	newArea.position = primaryBody.position + offset
+	newArea.position += offset
 	if get_parent() is RigidBody2D:
 		newArea.rotation = primaryBody.angular_velocity
 
-	var asteroidCollision = find_child("CollisionShape").duplicate()
-	newArea.add_child(asteroidCollision)
-	var mainSprite = find_child("MainSprite").duplicate()
-	newArea.add_child(mainSprite)
+	#var asteroidCollision = find_child("CollisionShape").duplicate()
+	#newArea.add_child(asteroidCollision)
+	#var mainSprite = find_child("MainSprite").duplicate()
+	#newArea.add_child(mainSprite)
 	
 	#print("adding " + newBodyName + " at (" + str(newArea.position.x) + "," + str(newArea.position.y) + ")")
 	
 	add_child(newArea)
 	
+
+
 func TooCloseToBottom(initial_position: Vector2):
-	var zone = find_parent("Zone")
-	var limit = zone.ZONE_HEIGHT / 2 - zone.VIEW_DISTANCE.y
+	var limit = BOTTOM_LIMIT
 	if initial_position.y >= limit:
-		#print("bottom: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToTop(initial_position: Vector2):
 	var zone = find_parent("Zone")
-	var limit = -zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y
+	var limit = TOP_LIMIT
 	if initial_position.y <= limit:
-		#print("top: " + str(position.y) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToLeft(initial_position: Vector2):
 	var zone = find_parent("Zone")
-	var limit = zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x
+	var limit = LEFT_LIMIT
 	if initial_position.x >= limit:
-		#print("left: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false
 func TooCloseToRight(initial_position: Vector2):
 	var zone = find_parent("Zone")
-	var limit = -zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x
+	var limit = RIGHT_LIMIT
 	if initial_position.x <= limit:
-		#print("right: " + str(position.x) + " vs " + str(limit))
 		return true
 	return false
