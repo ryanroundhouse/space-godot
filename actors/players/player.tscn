@@ -1,21 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy05gcnlm3mg7"]
+[gd_scene load_steps=3 format=3 uid="uid://cy05gcnlm3mg7"]
 
 [ext_resource type="Texture2D" uid="uid://c5lf2p8qo4ief" path="res://assets/ships/player ship.png" id="1_igpf8"]
 [ext_resource type="Script" path="res://actors/players/player.gd" id="1_s6jow"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4a4cb"]
-radius = 16.2788
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_s6jow")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_4a4cb")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_igpf8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-24, 16, -22, 6, -24, 4, -23, 2, -20, 2, -18, -1, -9, -10, -7, -3, -5, -11, 0, -19, 5, -11, 7, -3, 9, -10, 18, -1, 20, 2, 23, 2, 24, 4, 22, 7, 24, 16, 13, 6, 6, 13, 7, 6, 3, 14, 0, 19, -3, 13, -7, 6, -6, 13, -13, 6)
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
