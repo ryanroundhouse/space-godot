@@ -13,8 +13,8 @@ var duplicate_offset: Vector2
 	#connect("body_entered", _on_body_entered)
 
 
-#func _on_body_entered(body):
-	#print("Entered: ", body.name)
+func _on_body_entered(body):
+	print("Entered: ", body.name)
 
 func damage(weapon):
 	#print("I should blow up")
