@@ -10,11 +10,16 @@ signal destroy_laser()
 func _ready():
 	rotation += deg_to_rad(-90)
 	connect("body_entered", _on_body_entered)
+	connect("area_entered", _on_area_entered)
 
 func _on_body_entered(body):
 	#print("Laser entered: ", body.name)
 	if body.has_method("damage"):
 		body.damage(self.get_parent().get_parent())
+	emit_signal("destroy_laser")
+	
+func _on_area_entered(area):
+	print("Laser entered: ", area.name)
 	emit_signal("destroy_laser")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

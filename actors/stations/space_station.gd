@@ -4,4 +4,5 @@ var duplicate_offset
 
 func initialize(initial_position: Vector2):
 	var primaryBody = find_child("primaryBody")
-	primaryBody.position = initial_position
+	position = initial_position
+	#primaryBody.position = initial_position

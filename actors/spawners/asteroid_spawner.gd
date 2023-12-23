@@ -1,7 +1,7 @@
 extends Node2D
 
 var asteroid_scene = preload("res://actors/obstacles/asteroid.tscn")
-@export var number_of_asteroids := 35
+@export var number_of_asteroids := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,7 +33,7 @@ func spawnRandomAsteroid():
 	var asteroid = asteroid_scene.instantiate() 
 	asteroid.initialize(asteroid_position, linear_velocity, angular_velocity, scaleAmount)
 	add_child(asteroid)
-	print("spawned asteroid at (" + str(asteroid.position.x) + "," + str(asteroid.position.y) + ") with linear_velocity (" + str(directionX) + "," + str(directionY) + ") and angular_velocity: " + str(angular_velocity))
+	print("spawned asteroid at (" + str(asteroid_position.x) + "," + str(asteroid_position.y) + ") with linear_velocity (" + str(directionX) + "," + str(directionY) + ") and angular_velocity: " + str(angular_velocity))
 
 
 func _process(delta):

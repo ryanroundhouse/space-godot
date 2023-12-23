@@ -13,7 +13,7 @@ func _process(delta):
 	pass
 
 func _on_body_entered(body):
-	print("space station entered by: ", body.name)
+	print("station {station.name} entered by: {body.name}".format({"station.name": get_parent().get_parent().name, "body.name": body.name}))
 	if body is CharacterBody2D:
 		var push_direction = (body.global_position - global_position).normalized()
 		var push_strength = 1000  # Adjust this value as needed
