@@ -4,20 +4,26 @@ extends CharacterBody2D
 @export var max_speed := 850.0
 @export var rotation_speed := 250.0
 
-var fire_delay = 0.2
+var fire_delay = 0.05
 var last_fire = 0
+var IS_DEBUG := false
 
 var laser_scene = preload("res://actors/weapons/red_laser.tscn")
 
+func _ready():
+	var world = find_parent("World")
+	IS_DEBUG = world.IS_DEBUG
+
 func _process(delta):
-	if Input.is_action_pressed("shoot"):# && last_fire > fire_delay:
+	if Input.is_action_pressed("shoot") && last_fire > fire_delay:
 		fire_laser()
 		last_fire = 0
 	else:
 		last_fire += delta
-	var label = get_node("Label") as Label
-	label.rotation = -rotation
-	label.text = "Pos: %s" % position
+	if IS_DEBUG:
+		var label = get_node("Label") as Label
+		label.rotation = -rotation
+		label.text = "Pos: %s" % position
 
 func fire_laser():
 	var laser = laser_scene.instantiate()

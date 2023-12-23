@@ -50,9 +50,7 @@ func duplicateIfNecessary():
 		
 	var primaryBody = find_child("primaryBody")
 	var zone = find_parent("Zone")
-	
-	print("I'm {name} at {position} ".format({"name": get_parent().name, "position": primaryBody.position}))
-	
+		
 	# create bottom-clone if a screen away from the top
 	if TooCloseToTop(primaryBody.position):
 		if not bottomBody:
@@ -114,7 +112,6 @@ func duplicateIfNecessary():
 
 func duplicateBody(newBodyName: String, offset: Vector2):
 	var primaryBody = find_child("primaryBody")
-	#var newArea = preload("res://actors/shared/duplicateProperties.gd").new()
 	var newArea = primaryBody.duplicate()
 	newArea.name = newBodyName
 	newArea.duplicate_offset = offset
@@ -122,12 +119,7 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	if get_parent() is RigidBody2D:
 		newArea.rotation = primaryBody.angular_velocity
 
-	#var asteroidCollision = find_child("CollisionShape").duplicate()
-	#newArea.add_child(asteroidCollision)
-	#var mainSprite = find_child("MainSprite").duplicate()
-	#newArea.add_child(mainSprite)
-	
-	print("adding " + newBodyName + " at (" + str(newArea.position.x) + "," + str(newArea.position.y) + ")")
+	#print("adding " + newBodyName + " at (" + str(newArea.position.x) + "," + str(newArea.position.y) + ")")
 	
 	add_child(newArea)
 	
@@ -136,25 +128,20 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 func TooCloseToBottom(initial_position: Vector2):
 	var limit = BOTTOM_LIMIT
 	if initial_position.y >= limit:
-		print("too close to bottom limit: {pos.y} >= {limit}".format({"pos.y": initial_position.y, "limit": limit}))
 		return true
 	return false
 func TooCloseToTop(initial_position: Vector2):
 	var limit = TOP_LIMIT
 	if initial_position.y <= limit:
-		print("too close to top limit: {pos.y} <= {limit}".format({"pos.y": initial_position.y, "limit": limit}))
 		return true
-	print("not too close to top limit: {pos.y} <= {limit}".format({"pos.y": initial_position.y, "limit": limit}))
 	return false
 func TooCloseToLeft(initial_position: Vector2):
 	var limit = LEFT_LIMIT
 	if initial_position.x >= limit:
-		print("too close to bottom limit: {pos.x} >= {limit}".format({"pos.x": initial_position.x, "limit": limit}))
 		return true
 	return false
 func TooCloseToRight(initial_position: Vector2):
 	var limit = RIGHT_LIMIT
 	if initial_position.x <= limit:
-		print("too close to bottom limit: {pos.x} <= {limit}".format({"pos.x": initial_position.x, "limit": limit}))
 		return true
 	return false
