@@ -17,4 +17,5 @@ func _ready():
 	station.name = "space_station"
 	station.initialize(Vector2(-450,-450))
 	station.add_to_group("space_stations")
+	$Hud.Create_hud_cursor(station)
 	add_child(station)

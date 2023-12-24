@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkbfk25sktux8"]
+
+[ext_resource type="Texture2D" uid="uid://ba2n1gj166tfh" path="res://assets/hud/arrow1.png" id="1_b7f3d"]
+[ext_resource type="Script" path="res://hud/hud_cursor.gd" id="1_eoh36"]
+
+[node name="HudCursor" type="Node2D"]
+script = ExtResource("1_eoh36")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_b7f3d")
