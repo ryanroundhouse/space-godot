@@ -7,7 +7,9 @@
 script = ExtResource("1_lugiv")
 
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -1000
 texture_repeat = 2
 texture = ExtResource("1_s1v41")
 region_enabled = true
 region_rect = Rect2(0, 0, 8960, 8960)
+metadata/_edit_lock_ = true

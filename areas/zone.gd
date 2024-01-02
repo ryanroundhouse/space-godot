@@ -17,11 +17,14 @@ func _ready():
 	station.name = "space_station"
 	var stationPosition = Vector2(-450, -450)
 	var playerPosition = stationPosition + Vector2(150, -190)
-	var playerDirection = (stationPosition - playerPosition).angle() - 90
+	var playerDirection = (stationPosition - playerPosition).angle() - 89.7
 	station.initialize(stationPosition)
-	$Player.position = playerPosition
-	$Player.rotation = playerDirection
-	#$Player.position = Vector2(-300,-640)
 	station.add_to_group("space_stations")
 	$Hud.Create_hud_cursor(station)
 	add_child(station)
+	playerEnterZone(playerPosition, playerDirection)
+
+func playerEnterZone(position: Vector2, direction: float):
+	$Player.position = position
+	$Player.rotation = direction
+	$Player.velocity += Vector2(300,-300)

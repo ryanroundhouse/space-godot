@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://t2e2h2rnqrxd"]
+[gd_scene load_steps=8 format=3 uid="uid://t2e2h2rnqrxd"]
 
 [ext_resource type="Texture2D" uid="uid://c827a0tnv83mp" path="res://assets/stations/space_station1.png" id="1_1deut"]
 [ext_resource type="Script" path="res://actors/stations/space_station.gd" id="1_npkp7"]
 [ext_resource type="Script" path="res://actors/shared/duplicateOnEdge.gd" id="1_sxggh"]
 [ext_resource type="Script" path="res://actors/stations/space_station_body.gd" id="3_7to3l"]
+[ext_resource type="Texture2D" uid="uid://ddnqsekdmr6nr" path="res://assets/stations/space launch.jpg" id="5_abap6"]
+[ext_resource type="Script" path="res://actors/stations/dockingArea.gd" id="6_3qhds"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uw0u3"]
+size = Vector2(100, 200)
 
 [node name="SpaceStation" type="Node2D"]
 script = ExtResource("1_npkp7")
@@ -20,3 +25,21 @@ texture = ExtResource("1_1deut")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DuplicateOnEdges/primaryBody"]
 build_mode = 1
 polygon = PackedVector2Array(-138, 197, -135, 186, -99, 132, -104, 113, -74, 71, -122, 72, -138, 55, -148, 55, -159, 43, -156, 80, -205, 86, -215, 41, -215, 8, -202, -44, -155, -36, -160, 11, -150, -2, -137, -2, -122, -19, -69, -19, -100, -59, -97, -82, -104, -92, -100, -110, -79, -125, -62, -126, -52, -115, -31, -112, -1, -73, 4, -73, 30, -114, 45, -117, 81, -170, 91, -176, 96, -173, 71, -133, 107, -110, 136, -150, 140, -146, 137, -136, 102, -82, 106, -63, 77, -21, 125, -21, 140, -5, 151, -5, 162, 7, 161, -29, 207, -36, 217, 10, 217, 40, 205, 95, 158, 86, 162, 40, 151, 52, 139, 52, 125, 69, 73, 69, 103, 109, 101, 131, 107, 142, 102, 160, 81, 175, 63, 175, 55, 166, 33, 162, 4, 123, -1, 123, -27, 163, -43, 168, -78, 220, -88, 226, -94, 223, -68, 183, -105, 160, -134, 200)
+
+[node name="launch_arrows" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
+z_index = -1
+position = Vector2(120, -173)
+rotation = 0.537867
+texture = ExtResource("5_abap6")
+
+[node name="dockingArea" type="Area2D" parent="DuplicateOnEdges/primaryBody"]
+position = Vector2(-135, 235)
+rotation = 0.649713
+script = ExtResource("6_3qhds")
+
+[node name="dock_arrows" type="Sprite2D" parent="DuplicateOnEdges/primaryBody/dockingArea"]
+z_index = -1
+texture = ExtResource("5_abap6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody/dockingArea"]
+shape = SubResource("RectangleShape2D_uw0u3")
