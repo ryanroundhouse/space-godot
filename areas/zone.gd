@@ -22,9 +22,4 @@ func _ready():
 	station.add_to_group("space_stations")
 	$Hud.Create_hud_cursor(station)
 	add_child(station)
-	playerEnterZone(playerPosition, playerDirection)
-
-func playerEnterZone(position: Vector2, direction: float):
-	$Player.position = position
-	$Player.rotation = direction
-	$Player.velocity += Vector2(300,-300)
+	$Player.launchFromDock(playerPosition, playerDirection)

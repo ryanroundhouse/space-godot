@@ -72,6 +72,22 @@ func _physics_process(delta):
 	elif position.y < -zone.ZONE_HEIGHT / 2:
 		position.y = zone.ZONE_HEIGHT / 2
 
+func launchFromDock(launch_position: Vector2, launch_direction: float):
+	CAN_CONTROL = false
+	position = launch_position
+	rotation = launch_direction
+	velocity += Vector2(300,-300)
+	
+	var stall_timer = Timer.new()
+	stall_timer.wait_time = 2
+	stall_timer.one_shot = true
+	add_child(stall_timer)
+	stall_timer.connect("timeout", launchComplete)
+	stall_timer.start()
+
+func launchComplete():
+	CAN_CONTROL = true
+
 func dockTowards(direction: Vector2):
 	velocity = Vector2(0,0)
 	#rotation = direction.angle()
