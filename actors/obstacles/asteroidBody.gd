@@ -24,8 +24,9 @@ func damage(weapon):
 func _process(delta):
 	if IS_DEBUG:
 		var label = get_node("Label") as Label
-		label.rotation = -rotation
-		label.text = "Pos: %s" % position
+		if label:
+			label.rotation = -rotation
+			label.text = "Pos: %s" % position
 
 func _integrate_forces(state):
 	if isPrimary:
