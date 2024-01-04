@@ -17,9 +17,10 @@ func _ready():
 	station.name = "space_station"
 	var stationPosition = Vector2(-450, -450)
 	var playerPosition = stationPosition + Vector2(150, -190)
+	var playerVelocity = Vector2(300,-300)
 	var playerDirection = (stationPosition - playerPosition).angle() - 89.7
 	station.initialize(stationPosition)
 	station.add_to_group("space_stations")
 	cursorSpawner.Create_hud_cursor(station)
 	add_child(station)
-	$Player.launchFromDock(playerPosition, playerDirection)
+	$Player.launchFromDock(playerPosition, playerDirection, playerVelocity)
