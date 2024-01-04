@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d07yn6bj34kvn"]
+[gd_scene load_steps=3 format=3 uid="uid://d07yn6bj34kvn"]
 
 [ext_resource type="Script" path="res://Menu.gd" id="1_871q8"]
+[ext_resource type="Texture2D" uid="uid://6vcwhxsmhh2l" path="res://assets/stations/inside/dockingbays/dockingbay1.webp" id="2_mpjw8"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_871q8")
@@ -9,12 +10,18 @@ script = ExtResource("1_871q8")
 offset_right = 1535.0
 offset_bottom = 1150.0
 
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(749, 693)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_mpjw8")
+
 [node name="StartGameButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 661.0
-offset_top = 680.0
-offset_right = 882.0
-offset_bottom = 744.0
-text = "Start Game"
+offset_left = 635.0
+offset_top = 64.0
+offset_right = 856.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 30
+text = "Launch"
 
 [connection signal="pressed" from="Panel/StartGameButton" to="." method="_on_start_game_button_pressed"]
