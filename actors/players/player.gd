@@ -6,16 +6,11 @@ extends CharacterBody2D
 
 var fire_delay = 0.05
 var last_fire = 0
-var IS_DEBUG := false
 var CAN_CONTROL := true
 
 var docking_direction : Vector2
 
 var laser_scene = preload("res://actors/weapons/red_laser.tscn")
-
-func _ready():
-	var world = find_parent("World")
-	IS_DEBUG = world.IS_DEBUG
 
 func _process(delta):
 	if Input.is_action_pressed("shoot") && last_fire > fire_delay:
@@ -23,7 +18,7 @@ func _process(delta):
 		last_fire = 0
 	else:
 		last_fire += delta
-	if IS_DEBUG:
+	if World.IS_DEBUG:
 		var label = get_node("Label") as Label
 		label.rotation = -rotation
 		label.text = "Pos: %s" % position

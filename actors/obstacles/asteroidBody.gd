@@ -8,11 +8,6 @@ signal blowUp()
 
 var isPrimary := false
 var duplicate_offset: Vector2
-var IS_DEBUG := false
-
-func _ready():
-	var world = find_parent("World")
-	IS_DEBUG = world.IS_DEBUG
 
 func _on_body_entered(body):
 	print("Entered: ", body.name)
@@ -22,7 +17,7 @@ func damage(weapon):
 	emit_signal("blowUp")
 
 func _process(delta):
-	if IS_DEBUG:
+	if World.IS_DEBUG:
 		var label = get_node("Label") as Label
 		if label:
 			label.rotation = -rotation

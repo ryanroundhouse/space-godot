@@ -17,3 +17,8 @@ polygon = PackedVector2Array(-24, 16, -22, 6, -24, 4, -23, 2, -20, 2, -18, -1, -
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxc0pof5kqnv1"]
+[gd_scene load_steps=5 format=3 uid="uid://cxc0pof5kqnv1"]
 
 [ext_resource type="Script" path="res://areas/zone.gd" id="1_lugiv"]
 [ext_resource type="Texture2D" uid="uid://ba07h5ntgv7fy" path="res://assets/background/space1.jpg" id="1_s1v41"]
+[ext_resource type="PackedScene" uid="uid://cbnvfavnl62a" path="res://actors/spawners/asteroid_spawner.tscn" id="3_n3nh4"]
+[ext_resource type="PackedScene" uid="uid://bwe4ffiwnh1jm" path="res://hud/cursor_spawner.tscn" id="4_audg2"]
 
 [node name="Zone" type="Node2D"]
 script = ExtResource("1_lugiv")
@@ -13,3 +15,7 @@ texture = ExtResource("1_s1v41")
 region_enabled = true
 region_rect = Rect2(0, 0, 8960, 8960)
 metadata/_edit_lock_ = true
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("3_n3nh4")]
+
+[node name="CursorSpawner" parent="." instance=ExtResource("4_audg2")]
