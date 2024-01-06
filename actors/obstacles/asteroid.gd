@@ -2,11 +2,13 @@ extends Node2D
 
 var asteroid_scale : float = 1.0
 var death_particle_scene = preload("res://actors/obstacles/asteroid_explosion.tscn")
+var asteroid_break_sound_path := "res://assets/obstacles/asteroid_break.wav" 
 
 func _ready():
 	find_child("primaryBody").connect("blowUp", onBlowUp)
 
 func onBlowUp():
+	SoundManager.play_sound(asteroid_break_sound_path)
 	for child in find_child("DuplicateOnEdges").get_children():
 		var death_particle = death_particle_scene.instantiate()
 		death_particle.position = child.position

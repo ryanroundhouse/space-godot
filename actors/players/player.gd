@@ -10,6 +10,7 @@ var CAN_CONTROL := true
 
 var docking_direction : Vector2
 
+var collision_path = "res://assets/ships/collision.wav"
 var laser_scene = preload("res://actors/weapons/red_laser.tscn")
 
 func _process(delta):
@@ -45,6 +46,7 @@ func _physics_process(delta):
 		
 		
 		for collisionIndex in get_slide_collision_count():
+			SoundManager.play_sound(collision_path)
 			var collisionSubject = get_slide_collision(collisionIndex)
 			#if collisionSubject.get_collider() is RigidBody2D:
 			velocity += collisionSubject.get_normal() * 1000

@@ -8,9 +8,11 @@ var VIEW_DISTANCE : Vector2
 @onready var cursorSpawner = $CursorSpawner
 
 var space_station_scene = preload("res://actors/stations/space_station.tscn")
+var music_path = "res://assets/music/journey_to_the_sun_stellardrone.mp3"
 
 func _ready():
 	
+	SoundManager.play_bgm(music_path)
 	VIEW_DISTANCE = Vector2(get_viewport_rect().size.x, get_viewport_rect().size.y)
 
 	var station = space_station_scene.instantiate()
