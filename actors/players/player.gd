@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var max_speed := 850.0
 @export var rotation_speed := 250.0
 
-var fire_delay = 0.05
+var fire_delay = 0.1
 var last_fire = 0
 var CAN_CONTROL := true
 

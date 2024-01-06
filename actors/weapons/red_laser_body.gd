@@ -1,7 +1,7 @@
 extends Area2D
 
 var speed = 1400
-var max_range = 1000.0
+var max_range = 1100.0
 var traveled_distance = 0.0
 var duplicate_offset: Vector2
 
