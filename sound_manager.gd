@@ -18,8 +18,9 @@ func play_sound(sound_path):
 		player.play()
 
 func play_bgm(bgm_path):
-	bgm_player.stream = load(bgm_path)
-	bgm_player.play()
+	if not bgm_player.is_playing():
+		bgm_player.stream = load(bgm_path)
+		bgm_player.play()
 
 func stop_bgm():
 	bgm_player.stop()

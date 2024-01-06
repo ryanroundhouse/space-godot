@@ -25,14 +25,15 @@ func _ready():
 	update_health_bar()
 
 func _process(delta):
-	if Input.is_action_pressed("shoot") && last_fire > fire_delay:
-		fire_laser()
-		last_fire = 0
-	else:
-		last_fire += delta
+	if CAN_CONTROL:
+		if Input.is_action_pressed("shoot") && last_fire > fire_delay:
+			fire_laser()
+			last_fire = 0
+		else:
+			last_fire += delta
 		
-	if last_damage < damage_delay:
-		last_damage += delta
+		if last_damage < damage_delay:
+			last_damage += delta
 	
 	if World.IS_DEBUG:
 		var label = get_node("Label") as Label
