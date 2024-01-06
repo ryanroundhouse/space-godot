@@ -6,12 +6,23 @@ extends CharacterBody2D
 
 var fire_delay = 0.1
 var last_fire = 0
+var damage_delay = 0.1
+var last_damage = 0
+
 var CAN_CONTROL := true
+var health : = 100.0
+var max_health := 100.0
 
 var docking_direction : Vector2
 
 var collision_path = "res://assets/ships/collision.wav"
 var laser_scene = preload("res://actors/weapons/red_laser.tscn")
+
+var death_particle_scene = preload("res://actors/players/player_explosion.tscn")
+var asteroid_break_sound_path := "res://assets/obstacles/asteroid_break.wav"
+
+func _ready():
+	update_health_bar()
 
 func _process(delta):
 	if Input.is_action_pressed("shoot") && last_fire > fire_delay:
@@ -19,10 +30,31 @@ func _process(delta):
 		last_fire = 0
 	else:
 		last_fire += delta
+		
+	if last_damage < damage_delay:
+		last_damage += delta
+	
 	if World.IS_DEBUG:
 		var label = get_node("Label") as Label
 		label.rotation = -rotation
 		label.text = "Pos: %s" % position
+
+func take_damage(amount):
+	if last_damage >= damage_delay:
+		health -= amount
+		health = max(health, 0)
+		update_health_bar()
+		if !health:
+			destroy_player()
+		last_damage = 0
+
+func destroy_player():
+	onBlowUp()
+
+func update_health_bar():
+	print("update health from " + str($health_bar.value))
+	$health_bar.value = health / max_health * 100
+	print("update health to " + str($health_bar.value))
 
 func fire_laser():
 	var laser = laser_scene.instantiate()
@@ -50,6 +82,7 @@ func _physics_process(delta):
 			var collisionSubject = get_slide_collision(collisionIndex)
 			#if collisionSubject.get_collider() is RigidBody2D:
 			velocity += collisionSubject.get_normal() * 1000
+			take_damage(25)
 		
 		# slow down if not moving faster
 		if input_vector.y == 0:
@@ -68,6 +101,26 @@ func _physics_process(delta):
 		position.y = -zone.ZONE_HEIGHT / 2
 	elif position.y < -zone.ZONE_HEIGHT / 2:
 		position.y = zone.ZONE_HEIGHT / 2
+
+func onBlowUp():
+	SoundManager.play_sound(asteroid_break_sound_path)
+	var death_particle = death_particle_scene.instantiate()
+	death_particle.position = global_position
+	death_particle.emitting = true
+	get_tree().current_scene.add_child(death_particle)
+	CAN_CONTROL = false
+	velocity = Vector2.ZERO
+	visible = false
+	
+	var restart_timer = Timer.new()
+	restart_timer.wait_time = 5
+	restart_timer.one_shot = true
+	add_child(restart_timer)
+	restart_timer.connect("timeout", restart)
+	restart_timer.start()
+
+func restart():
+	get_tree().change_scene_to_packed(World.menu_scene)	 
 
 func launchFromDock(launch_position: Vector2, launch_direction: float, launch_velocity: Vector2):
 	CAN_CONTROL = true
@@ -105,6 +158,6 @@ func startDocking():
 
 func finishDocking():
 	print("finished docking")
-	velocity = Vector2(0,0)
+	velocity = Vector2.ZERO
 	get_tree().change_scene_to_packed(World.menu_scene)
 	
