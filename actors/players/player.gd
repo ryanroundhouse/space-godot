@@ -39,7 +39,7 @@ func _process(delta):
 		label.rotation = -rotation
 		label.text = "Pos: %s" % position
 
-func take_damage(amount):
+func damage(amount):
 	if last_damage >= damage_delay:
 		health -= amount
 		health = max(health, 0)
@@ -77,7 +77,7 @@ func _physics_process(delta):
 			var collisionSubject = get_slide_collision(collisionIndex)
 			#if collisionSubject.get_collider() is RigidBody2D:
 			velocity += collisionSubject.get_normal() * 1000
-			take_damage(25)
+			damage(25)
 		
 		# slow down if not moving faster
 		if input_vector.y == 0:

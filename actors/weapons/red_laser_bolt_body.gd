@@ -13,10 +13,11 @@ func _ready():
 	connect("area_entered", _on_area_entered)
 
 func _on_body_entered(body):
-	#print("Laser entered: ", body.name)
-	if body.has_method("damage"):
-		body.damage(self.get_parent().get_parent())
-	emit_signal("destroy_laser")
+	var red_laser_bolt = get_parent().get_parent()
+	if body != red_laser_bolt.source:
+		if body.has_method("damage"):
+			body.damage(red_laser_bolt.damage)
+		emit_signal("destroy_laser")
 	
 func _on_area_entered(area):
 	print("Laser entered: ", area.name)

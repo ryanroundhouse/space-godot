@@ -12,7 +12,7 @@ var duplicate_offset: Vector2
 func _on_body_entered(body):
 	print("Entered: ", body.name)
 
-func damage(weapon):
+func damage(damage_amount):
 	#print("I should blow up")
 	emit_signal("blowUp")
 

@@ -7,7 +7,7 @@ var last_fire = 0
 
 func create_laser_bolt():
 	var laser = laser_bolt_scene.instantiate()
-	laser.initialize(self.global_position + Vector2(0,-25).rotated(global_rotation), self.global_rotation)
+	laser.initialize(self.global_position + Vector2(0,-35).rotated(global_rotation), self.global_rotation, get_parent())
 	get_parent().get_parent().add_child(laser)
 
 func _process(delta):
