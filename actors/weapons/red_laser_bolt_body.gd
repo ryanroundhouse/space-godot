@@ -24,7 +24,6 @@ func _on_area_entered(area):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	var movement = Vector2(speed, 0).rotated(rotation) * delta
 	position += movement
 	traveled_distance += movement.length()

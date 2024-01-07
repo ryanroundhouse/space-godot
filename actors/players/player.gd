@@ -4,8 +4,9 @@ extends CharacterBody2D
 @export var max_speed := 850.0
 @export var rotation_speed := 250.0
 
-var fire_delay = 0.1
-var last_fire = 0
+@export var primaryWeaponScene := preload("res://actors/weapons/laser_cannon/laser_cannon.tscn")
+var primaryWeapon : Node2D
+
 var damage_delay = 0.1
 var last_damage = 0
 
@@ -16,22 +17,20 @@ var max_health := 100.0
 var docking_direction : Vector2
 
 var collision_path = "res://assets/ships/collision.wav"
-var laser_scene = preload("res://actors/weapons/red_laser.tscn")
 
 var death_particle_scene = preload("res://actors/players/player_explosion.tscn")
 var asteroid_break_sound_path := "res://assets/obstacles/asteroid_break.wav"
 
 func _ready():
+	primaryWeapon = primaryWeaponScene.instantiate()
+	add_child(primaryWeapon)
 	update_health_bar()
 
 func _process(delta):
 	if CAN_CONTROL:
-		if Input.is_action_pressed("shoot") && last_fire > fire_delay:
-			fire_laser()
-			last_fire = 0
-		else:
-			last_fire += delta
-		
+		if Input.is_action_pressed("shoot"):
+			fire_weapon()
+			
 		if last_damage < damage_delay:
 			last_damage += delta
 	
@@ -56,11 +55,6 @@ func update_health_bar():
 	print("update health from " + str($health_bar.value))
 	$health_bar.value = health / max_health * 100
 	print("update health to " + str($health_bar.value))
-
-func fire_laser():
-	var laser = laser_scene.instantiate()
-	laser.initialize(self.position + Vector2(0,-25).rotated(rotation), self.rotation)
-	get_parent().add_child(laser)
 
 func _physics_process(delta):
 	if CAN_CONTROL:
@@ -102,6 +96,10 @@ func _physics_process(delta):
 		position.y = -zone.ZONE_HEIGHT / 2
 	elif position.y < -zone.ZONE_HEIGHT / 2:
 		position.y = zone.ZONE_HEIGHT / 2
+
+func fire_weapon():
+	if primaryWeapon:
+		primaryWeapon.fire_weapon()
 
 func onBlowUp():
 	SoundManager.play_sound(asteroid_break_sound_path)
