@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy05gcnlm3mg7"]
+[gd_scene load_steps=4 format=3 uid="uid://cy05gcnlm3mg7"]
 
 [ext_resource type="Texture2D" uid="uid://c5lf2p8qo4ief" path="res://assets/ships/player ship.png" id="1_igpf8"]
 [ext_resource type="Script" path="res://actors/players/player.gd" id="1_s6jow"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1a43"]
+bg_color = Color(0, 1, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_mask = 3
@@ -28,4 +35,6 @@ offset_left = -49.0
 offset_top = 23.0
 offset_right = 49.0
 offset_bottom = 28.0
+theme_override_styles/background = SubResource("StyleBoxFlat_q1a43")
+value = 100.0
 show_percentage = false
