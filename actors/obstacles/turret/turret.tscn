@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctc3hpyarwom8"]
+
+[ext_resource type="Script" path="res://actors/shared/duplicateOnEdge.gd" id="1_invso"]
+[ext_resource type="Texture2D" uid="uid://bnkbxmhtdfe28" path="res://assets/obstacles/turret/turret1.png" id="2_vrfm8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqvbj"]
+radius = 28.0179
+
+[node name="Turret" type="Node2D"]
+
+[node name="DuplicateOnEdges" type="Node2D" parent="."]
+script = ExtResource("1_invso")
+
+[node name="primaryBody" type="StaticBody2D" parent="DuplicateOnEdges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
+shape = SubResource("CircleShape2D_mqvbj")
+
+[node name="Sprite2D" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
+rotation = 1.5708
+texture = ExtResource("2_vrfm8")
