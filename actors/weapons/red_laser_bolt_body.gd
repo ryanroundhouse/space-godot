@@ -20,7 +20,9 @@ func _on_body_entered(body):
 		emit_signal("destroy_laser")
 	
 func _on_area_entered(area):
-	print("Laser entered: ", area.name)
+	if area.has_method("damage"):
+		var red_laser_bolt = get_parent().get_parent()
+		area.damage(red_laser_bolt.damage)
 	emit_signal("destroy_laser")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

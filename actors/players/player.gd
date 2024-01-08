@@ -52,9 +52,7 @@ func destroy_player():
 	onBlowUp()
 
 func update_health_bar():
-	print("update health from " + str($health_bar.value))
 	$health_bar.value = health / max_health * 100
-	print("update health to " + str($health_bar.value))
 
 func _physics_process(delta):
 	if CAN_CONTROL:
@@ -126,7 +124,6 @@ func launchFromDock(launch_position: Vector2, launch_direction: float, launch_ve
 	position = launch_position
 	rotation = launch_direction
 	velocity += launch_velocity
-
 
 func dockTowards(direction: Vector2):
 	velocity = Vector2(0,0)
