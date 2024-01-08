@@ -52,7 +52,7 @@ func destroy_player():
 	onBlowUp()
 
 func update_health_bar():
-	$health_bar.value = health / max_health * 100
+	$health_bar.set_health(health / max_health * 100.0)
 
 func _physics_process(delta):
 	if CAN_CONTROL:
