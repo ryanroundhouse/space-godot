@@ -2,13 +2,15 @@ extends Node2D
 
 enum state { IDLE, TRACKING }
 
+signal blowUp()
+
 var targets = []
 var mode := state.IDLE
 var rotation_speed = 36
 
 @export var death_particle_scene = preload("res://actors/players/player_explosion.tscn")
 @export var primaryWeaponScene := preload("res://actors/weapons/laser_cannon/laser_cannon.tscn")
-var asteroid_break_sound_path := "res://assets/obstacles/asteroid_break.wav" 
+var asteroid_break_sound_path := "res://assets/obstacles/asteroid_break.wav"
 
 var primaryWeapon : Node2D
 
@@ -26,7 +28,7 @@ func onBlowUp():
 		death_particle.position = child.global_position
 		death_particle.emitting = true
 		get_tree().current_scene.add_child(death_particle)
-	
+	blowUp.emit()
 	queue_free()
 
 func fire_weapon():

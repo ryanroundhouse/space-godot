@@ -9,6 +9,10 @@ func initialize(target: Node):
 	player = find_parent("Zone").find_child("Player")
 
 func _process(delta):
+	if not targetOfCursor:
+		queue_free()
+		return
+		
 	if player && targetOfCursor:
 		var player_position = player.global_position
 		var target_position = targetOfCursor.global_position

@@ -17,6 +17,7 @@ func _ready():
 
 	var station = space_station_scene.instantiate()
 	station.name = "space_station"
+	station.add_to_group("targettable")
 	var stationPosition = Vector2(-450, -450)
 	var playerPosition = stationPosition + Vector2(150, -190)
 	var playerVelocity = Vector2(300,-300)

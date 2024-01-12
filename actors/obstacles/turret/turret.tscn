@@ -11,7 +11,7 @@ radius = 28.0179
 [sub_resource type="CircleShape2D" id="CircleShape2D_w5nwq"]
 radius = 472.61
 
-[node name="Turret" type="Node2D"]
+[node name="Turret" type="Node2D" groups=["targettable"]]
 script = ExtResource("1_jbux0")
 
 [node name="DuplicateOnEdges" type="Node2D" parent="."]
