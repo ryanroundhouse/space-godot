@@ -37,7 +37,6 @@ func fire_weapon():
 
 func damage(damage_amount):
 	print("I should blow up")
-	#emit_signal("blowUp")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -79,15 +78,15 @@ func shortest_angle_between(target, current):
 
 func process_idle(delta):
 	rotation_degrees += rotation_speed * delta
-	rotation = deg_to_rad(rotation_degrees)  # Godot uses radians for rotation
+	rotation = deg_to_rad(rotation_degrees)
 
 func _on_sensor_body_entered(body):
-	print(body.name + " body entered sensor range")
+	#print(body.name + " body entered sensor range")
 	if not targets.has(body):
 		targets.append(body)
 
 
 func _on_sensor_body_exited(body):
-	print(body.name + " body exited sensor range")
+	#print(body.name + " body exited sensor range")
 	if targets.has(body):
 		targets.erase(body)
