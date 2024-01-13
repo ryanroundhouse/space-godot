@@ -8,10 +8,11 @@ func _ready():
 	find_child("primaryBody").connect("blowUp", onBlowUp)
 
 func onBlowUp():
-	SoundManager.play_sound(asteroid_break_sound_path)
+	var player = get_tree().get_nodes_in_group("player")
 	for child in find_child("DuplicateOnEdges").get_children():
 		var death_particle = death_particle_scene.instantiate()
 		death_particle.position = child.position
+		SoundManager.play_sound(asteroid_break_sound_path, child.global_position, player[0].global_position)
 		death_particle.emitting = true
 		get_tree().current_scene.add_child(death_particle)
 	
