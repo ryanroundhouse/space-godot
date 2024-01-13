@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://areas/zone.gd" id="1_lugiv"]
 [ext_resource type="Texture2D" uid="uid://ba07h5ntgv7fy" path="res://assets/background/space1.jpg" id="1_s1v41"]
 [ext_resource type="PackedScene" uid="uid://cbnvfavnl62a" path="res://actors/spawners/asteroid_spawner.tscn" id="3_n3nh4"]
-[ext_resource type="PackedScene" uid="uid://bwe4ffiwnh1jm" path="res://actors/hud/target_cursor_spawner.tscn" id="4_ocpin"]
+[ext_resource type="PackedScene" uid="uid://bwe4ffiwnh1jm" path="res://actors/hud/cursor_manager.tscn" id="4_himux"]
 
 [node name="Zone" type="Node2D"]
 script = ExtResource("1_lugiv")
@@ -18,4 +18,4 @@ metadata/_edit_lock_ = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("3_n3nh4")]
 
-[node name="CursorSpawner" parent="." instance=ExtResource("4_ocpin")]
+[node name="CursorSpawner" parent="." instance=ExtResource("4_himux")]

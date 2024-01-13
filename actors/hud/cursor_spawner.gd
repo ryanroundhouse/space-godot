@@ -17,6 +17,8 @@ func create_target_cursor(hud_target: Node):
 	var cursor_icon_path = "res://assets/hud/arrow1.png"
 	if hud_target.is_in_group("hostile"):
 		cursor_icon_path = "res://assets/hud/arrow2.png"
+	elif hud_target.is_in_group("objective"):
+		cursor_icon_path = "res://assets/hud/arrow3.png"
 	add_child(hud_cursor)
 	hud_cursor.initialize(hud_target, cursor_icon_path)
 	if hud_target.has_signal("blowUp"):
