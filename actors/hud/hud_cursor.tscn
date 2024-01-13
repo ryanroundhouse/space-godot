@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkbfk25sktux8"]
+
+[ext_resource type="Script" path="res://actors/hud/hud_cursor.gd" id="1_v5kcj"]
+
+[node name="HudCursor" type="Node2D"]
+script = ExtResource("1_v5kcj")
+
+[node name="CursorSprite" type="Sprite2D" parent="."]

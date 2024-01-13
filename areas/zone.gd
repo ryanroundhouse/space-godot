@@ -24,6 +24,6 @@ func _ready():
 	var playerDirection = (stationPosition - playerPosition).angle() - 89.7
 	station.initialize(stationPosition)
 	station.add_to_group("space_stations")
-	cursorSpawner.Create_hud_cursor(station)
+	cursorSpawner.create_target_cursor(station)
 	add_child(station)
 	$Player.launchFromDock(playerPosition, playerDirection, playerVelocity)

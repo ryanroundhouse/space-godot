@@ -4,9 +4,10 @@ extends Node2D
 var targetOfCursor: Node
 var player : Node
 
-func initialize(target: Node):
+func initialize(target: Node, cursor_sprite_location: String):
 	targetOfCursor = target
 	player = find_parent("Zone").find_child("Player")
+	$CursorSprite.texture = load(cursor_sprite_location)
 
 func _process(delta):
 	if not targetOfCursor:

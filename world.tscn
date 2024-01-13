@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://chlw0bch6bsxd"]
+[gd_scene load_steps=5 format=3 uid="uid://chlw0bch6bsxd"]
 
 [ext_resource type="PackedScene" uid="uid://cxc0pof5kqnv1" path="res://areas/zone.tscn" id="2_1cvlq"]
 [ext_resource type="PackedScene" uid="uid://cy05gcnlm3mg7" path="res://actors/players/player.tscn" id="2_p8bww"]
 [ext_resource type="PackedScene" uid="uid://ctc3hpyarwom8" path="res://actors/obstacles/turret/turret.tscn" id="3_7idlp"]
+[ext_resource type="Texture2D" uid="uid://bus6k7v812gvs" path="res://assets/obstacles/jump_point.png" id="4_yd5j6"]
 
 [node name="ZoneBuilder" type="Node2D"]
 
@@ -12,4 +13,8 @@
 collision_mask = 2
 
 [node name="Turret" parent="Zone" instance=ExtResource("3_7idlp")]
-position = Vector2(96, -224)
+position = Vector2(393, 160)
+
+[node name="Jump Point" type="Sprite2D" parent="."]
+position = Vector2(3371, -3649)
+texture = ExtResource("4_yd5j6")
