@@ -19,8 +19,8 @@ func _ready():
 	station.name = "space_station"
 	station.add_to_group("targettable")
 	var stationPosition = Vector2(-450, -450)
-	#var playerPosition = stationPosition + Vector2(150, -190)
-	var playerPosition = Vector2(-2500, 2300)
+	var playerPosition = stationPosition + Vector2(150, -190)
+	#var playerPosition = Vector2(-2500, 2300)
 	var playerVelocity = Vector2(300,-300)
 	var playerDirection = (stationPosition - playerPosition).angle() - 89.7
 	station.initialize(stationPosition)
