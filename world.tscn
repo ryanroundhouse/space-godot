@@ -10,6 +10,7 @@
 [node name="Zone" parent="." instance=ExtResource("2_1cvlq")]
 
 [node name="JumpPoint" parent="Zone" instance=ExtResource("2_3y0w6")]
+position = Vector2(3467, -3730)
 
 [node name="Player" parent="Zone" instance=ExtResource("2_p8bww")]
 collision_mask = 2

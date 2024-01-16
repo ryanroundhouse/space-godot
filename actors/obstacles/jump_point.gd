@@ -6,6 +6,9 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotation_degrees += 5 * delta
+	var primaryBody = find_child("primaryBody")
+	
+	for child in find_child("DuplicateOnEdges").get_children():
+		if child.name != "primaryBody":
+			child.position = primaryBody.position + child.duplicate_offset

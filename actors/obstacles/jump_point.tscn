@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6aqk3r0ueug5"]
+[gd_scene load_steps=6 format=3 uid="uid://b6aqk3r0ueug5"]
 
 [ext_resource type="Script" path="res://actors/shared/duplicateOnEdge.gd" id="1_hpvr8"]
 [ext_resource type="Script" path="res://actors/obstacles/jump_point.gd" id="1_reyul"]
 [ext_resource type="Texture2D" uid="uid://bus6k7v812gvs" path="res://assets/obstacles/jump_point.png" id="2_t0xd4"]
+[ext_resource type="Script" path="res://actors/obstacles/jumpGateBody.gd" id="3_7itq3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b08ro"]
 radius = 243.387
@@ -15,6 +16,7 @@ script = ExtResource("1_reyul")
 script = ExtResource("1_hpvr8")
 
 [node name="primaryBody" type="Area2D" parent="DuplicateOnEdges"]
+script = ExtResource("3_7itq3")
 
 [node name="Sprite2D" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
 texture = ExtResource("2_t0xd4")
