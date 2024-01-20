@@ -16,10 +16,6 @@ func _ready():
 	TOP_LIMIT = -zone.ZONE_HEIGHT / 2 + zone.VIEW_DISTANCE.y
 	RIGHT_LIMIT = zone.ZONE_WIDTH / 2 - zone.VIEW_DISTANCE.x
 	LEFT_LIMIT = -zone.ZONE_WIDTH / 2 + zone.VIEW_DISTANCE.x
-	print("top limit: " + str(TOP_LIMIT))
-	print("bottom limit: " + str(BOTTOM_LIMIT))
-	print("left limit: " + str(LEFT_LIMIT))
-	print("right limit: " + str(RIGHT_LIMIT))
 
 func onPrimaryBodyWarped():		
 	if has_node("topBody"):

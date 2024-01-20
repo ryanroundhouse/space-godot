@@ -23,3 +23,8 @@ texture = ExtResource("2_t0xd4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
 shape = SubResource("CircleShape2D_b08ro")
+
+[connection signal="body_entered" from="DuplicateOnEdges/primaryBody" to="DuplicateOnEdges/primaryBody" method="_on_body_entered"]
+[connection signal="body_exited" from="DuplicateOnEdges/primaryBody" to="DuplicateOnEdges/primaryBody" method="_on_body_exited"]
+[connection signal="promote_body_entered" from="DuplicateOnEdges/primaryBody" to="." method="on_promote_body_entered"]
+[connection signal="promote_body_exited" from="DuplicateOnEdges/primaryBody" to="." method="_on_promote_body_exited"]

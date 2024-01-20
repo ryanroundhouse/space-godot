@@ -16,20 +16,38 @@ var max_health := 100.0
 
 var docking_direction : Vector2
 
+var destination_system : String = ""
+var jump_timer : Timer
+
 var collision_path = "res://assets/ships/collision.wav"
 
 var death_particle_scene = preload("res://actors/players/player_explosion.tscn")
 var asteroid_break_sound_path := "res://assets/obstacles/asteroid_break.wav"
 
 func _ready():
+	jump_timer = Timer.new()
+	jump_timer.wait_time = 3
+	add_child(jump_timer)
+	jump_timer.connect("timeout", _on_jump_timer_timeout)
+	
 	primaryWeapon = primaryWeaponScene.instantiate()
 	add_child(primaryWeapon)
 	update_health_bar()
+
+func _on_jump_timer_timeout():
+	if destination_system:
+		get_tree().change_scene_to_packed(World.menu_scene)
+	else:
+		print("jump aborted!")
 
 func _process(delta):
 	if CAN_CONTROL:
 		if Input.is_action_pressed("shoot"):
 			fire_weapon()
+		if Input.is_action_just_pressed("initiate_jump"):
+			jump_timer.start()
+		if Input.is_action_just_released("initiate_jump"):
+			jump_timer.stop()
 			
 		if last_damage < damage_delay:
 			last_damage += delta
@@ -50,6 +68,14 @@ func damage(amount):
 
 func destroy_player():
 	onBlowUp()
+	
+func set_jump_destination(destination):
+	destination_system = destination
+	print("destination set to: " + destination_system)
+
+func remove_jump_destination():
+	destination_system = ""
+	print("destination set to: " + destination_system)
 
 func update_health_bar():
 	$health_bar.set_health(health / max_health * 100.0)
