@@ -1,11 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://chlw0bch6bsxd"]
+[gd_scene load_steps=2 format=3 uid="uid://chlw0bch6bsxd"]
 
 [ext_resource type="PackedScene" uid="uid://cxc0pof5kqnv1" path="res://areas/zone.tscn" id="2_1cvlq"]
-[ext_resource type="PackedScene" uid="uid://cy05gcnlm3mg7" path="res://actors/players/player.tscn" id="2_p8bww"]
 
 [node name="ZoneBuilder" type="Node2D"]
 
 [node name="Zone" parent="." instance=ExtResource("2_1cvlq")]
-
-[node name="Player" parent="Zone" instance=ExtResource("2_p8bww")]
-collision_mask = 2

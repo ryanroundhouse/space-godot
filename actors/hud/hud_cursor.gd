@@ -6,7 +6,7 @@ var player : Node
 
 func initialize(target: Node, cursor_sprite_location: String):
 	targetOfCursor = target
-	player = find_parent("Zone").find_child("Player")
+	player = get_tree().get_nodes_in_group("Player")[0]
 	$CursorSprite.texture = load(cursor_sprite_location)
 
 func _process(delta):
