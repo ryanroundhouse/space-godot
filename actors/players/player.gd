@@ -148,8 +148,9 @@ func restart():
 
 func launchFromDock(launch_position: Vector2, launch_direction: float, launch_velocity: Vector2):
 	CAN_CONTROL = true
-	position = launch_position
-	rotation = launch_direction
+	global_position = launch_position
+	#rotation = launch_direction
+	rotation_degrees = launch_direction
 	velocity += launch_velocity
 
 func dockTowards(direction: Vector2):

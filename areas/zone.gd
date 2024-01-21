@@ -19,6 +19,9 @@ func _ready():
 	VIEW_DISTANCE = Vector2(get_viewport_rect().size.x, get_viewport_rect().size.y)
 	
 	var stationPosition = Vector2(-450, -450)
+	var launchPosition = Vector2(-308, -646)
+	var launchVelocity = Vector2(300,-300)
+	var launchDirection = 35.0
 	var turretPosition = Vector2(-1000, -1000)
 	var jumpPointPosition = Vector2(2400, 2000)
 	
@@ -34,7 +37,7 @@ func _ready():
 	spawn_station(stationPosition)
 	spawn_turret(turretPosition)
 	spawn_jump_point(jumpPointPosition)
-	launch_player(stationPosition)
+	launch_player(launchPosition, launchVelocity, launchDirection)
 
 func load_cursor_spawner():
 	var cursor_manager = cursor_manager_scene.instantiate()
@@ -60,13 +63,13 @@ func spawn_turret(turret_position: Vector2):
 	turret.add_to_group("targettable")
 	add_child(turret)
 
-func launch_player(launch_position: Vector2):
+func launch_player(launch_position: Vector2, launch_velocity: Vector2, launch_direction: float):
 	var player = player_scene.instantiate()
-	player.name = "Player"
+	player.name = "Player" 
 	player.add_to_group("Player")
-	var playerPosition = launch_position + Vector2(150, -190)
-	var playerVelocity = Vector2(300,-300)
-	var playerDirection = (launch_position - playerPosition).angle() - 89.7
+	var playerPosition = launch_position
+	var playerVelocity = launch_velocity
+	var playerDirection = launch_direction
 	add_child(player)
 	player.launchFromDock(playerPosition, playerDirection, playerVelocity)
 
