@@ -35,7 +35,7 @@ func _ready():
 	load_cursor_spawner()
 	
 	spawn_station(stationPosition)
-	spawn_turret(turretPosition)
+	#spawn_turret(turretPosition)
 	spawn_jump_point(jumpPointPosition)
 	launch_player(launchPosition, launchVelocity, launchDirection)
 

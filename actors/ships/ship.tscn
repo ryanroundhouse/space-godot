@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8k6yn0hsvnbw"]
+
+[ext_resource type="Texture2D" uid="uid://buajnt1eg0nrj" path="res://assets/ships/enemy_ship1.png" id="1_1g7hb"]
+[ext_resource type="Script" path="res://actors/ships/ship.gd" id="1_53n8j"]
+[ext_resource type="Script" path="res://actors/shared/duplicateOnEdge.gd" id="1_lxxug"]
+[ext_resource type="Script" path="res://actors/ships/shipBody.gd" id="3_bjeww"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2cvd"]
+radius = 87.9659
+
+[node name="Ship" type="CharacterBody2D" groups=["hostile", "targettable"]]
+scale = Vector2(0.35, 0.35)
+script = ExtResource("1_53n8j")
+
+[node name="DuplicateOnEdges" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_lxxug")
+
+[node name="primaryBody" type="Area2D" parent="DuplicateOnEdges"]
+script = ExtResource("3_bjeww")
+
+[node name="Sprite2D" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("1_1g7hb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_p2cvd")
+
+[node name="DebugLabel" type="Label" parent="DuplicateOnEdges/primaryBody"]
+offset_right = 40.0
+offset_bottom = 23.0

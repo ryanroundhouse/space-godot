@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://chlw0bch6bsxd"]
+[gd_scene load_steps=3 format=3 uid="uid://chlw0bch6bsxd"]
 
 [ext_resource type="PackedScene" uid="uid://cxc0pof5kqnv1" path="res://areas/zone.tscn" id="2_1cvlq"]
+[ext_resource type="PackedScene" uid="uid://c8k6yn0hsvnbw" path="res://actors/ships/ship.tscn" id="2_k372p"]
 
 [node name="ZoneBuilder" type="Node2D"]
 
 [node name="Zone" parent="." instance=ExtResource("2_1cvlq")]
+
+[node name="Ship" parent="Zone" instance=ExtResource("2_k372p")]
+position = Vector2(961, 392)
