@@ -77,7 +77,8 @@ func _process(delta):
 			child.global_rotation = primaryBody.global_rotation
 
 func process_tracking(delta):
-	var target_angle = (targets[0].global_position - global_position).angle()
+	var target_position = targets[0].get_closest_body_dupe_position(global_position)
+	var target_angle = (target_position - global_position).angle()
 	var current_angle = rotation
 	
 	var difference = shortest_angle_between(target_angle, current_angle)
@@ -105,12 +106,13 @@ func process_idle(delta):
 	rotation = deg_to_rad(rotation_degrees)
 
 func _on_sensor_body_entered(body):
-	#print(body.name + " body entered sensor range")
+	print(body.name + " of " + body.get_parent().get_parent().name + " entered.")
 	if not targets.has(body):
 		targets.append(body)
 
 
 func _on_sensor_body_exited(body):
+	print(body.name + " exited.")
 	#print(body.name + " body exited sensor range")
 	if targets.has(body):
 		targets.erase(body)

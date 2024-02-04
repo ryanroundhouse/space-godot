@@ -23,7 +23,7 @@ func _ready():
 	var launchPosition = Vector2(-308, -646)
 	var launchVelocity = Vector2(300,-300)
 	var launchDirection = 35.0
-	var turretPosition = Vector2(-3000, -3000)
+	var turretPosition = Vector2(-2000, -2000)
 	var jumpPointPosition = Vector2(2400, 2000)
 	
 	var background : Sprite2D = $Background
@@ -32,8 +32,8 @@ func _ready():
 	background.region_enabled = true
 	background.region_rect = Rect2(Vector2.ZERO, Vector2(8960,8960))
 	
-	#load_asteroid_spawner(36)
-	#load_enemy_ship_spawner(1)
+	load_asteroid_spawner(36)
+	load_enemy_ship_spawner(2)
 	load_cursor_spawner()
 	
 	spawn_station(stationPosition)

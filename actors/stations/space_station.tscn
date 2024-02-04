@@ -17,6 +17,7 @@ script = ExtResource("1_npkp7")
 script = ExtResource("1_sxggh")
 
 [node name="primaryBody" type="Area2D" parent="DuplicateOnEdges"]
+collision_layer = 2
 script = ExtResource("3_7to3l")
 
 [node name="Sprite2D" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]
@@ -35,6 +36,7 @@ texture = ExtResource("5_abap6")
 [node name="dockingArea" type="Area2D" parent="DuplicateOnEdges/primaryBody"]
 position = Vector2(-135, 235)
 rotation = 0.649713
+collision_layer = 8
 script = ExtResource("6_3qhds")
 
 [node name="dock_arrows" type="Sprite2D" parent="DuplicateOnEdges/primaryBody/dockingArea"]
@@ -43,3 +45,6 @@ texture = ExtResource("5_abap6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody/dockingArea"]
 shape = SubResource("RectangleShape2D_uw0u3")
+
+[connection signal="area_entered" from="DuplicateOnEdges/primaryBody/dockingArea" to="DuplicateOnEdges/primaryBody/dockingArea" method="_on_body_entered"]
+[connection signal="body_entered" from="DuplicateOnEdges/primaryBody/dockingArea" to="DuplicateOnEdges/primaryBody/dockingArea" method="_on_body_entered"]

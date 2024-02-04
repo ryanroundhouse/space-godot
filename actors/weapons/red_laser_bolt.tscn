@@ -15,8 +15,8 @@ script = ExtResource("1_geany")
 script = ExtResource("2_f3v2g")
 
 [node name="primaryBody" type="Area2D" parent="DuplicateOnEdges"]
-collision_layer = 4
-collision_mask = 3
+collision_layer = 16
+collision_mask = 7
 script = ExtResource("3_qh05a")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]

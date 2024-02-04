@@ -18,6 +18,8 @@ script = ExtResource("1_jbux0")
 script = ExtResource("1_invso")
 
 [node name="primaryBody" type="Area2D" parent="DuplicateOnEdges" groups=["BodyDupe"]]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("3_uispj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
@@ -28,13 +30,13 @@ rotation = 1.5708
 texture = ExtResource("2_vrfm8")
 
 [node name="Sensor" type="Area2D" parent="DuplicateOnEdges/primaryBody"]
-collision_layer = 4
+collision_layer = 16
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody/Sensor"]
 shape = SubResource("CircleShape2D_w5nwq")
 
-[connection signal="area_entered" from="DuplicateOnEdges/primaryBody/Sensor" to="." method="_on_sensor_area_entered"]
-[connection signal="area_exited" from="DuplicateOnEdges/primaryBody/Sensor" to="." method="_on_sensor_area_exited"]
+[connection signal="area_entered" from="DuplicateOnEdges/primaryBody/Sensor" to="." method="_on_sensor_body_entered"]
+[connection signal="area_exited" from="DuplicateOnEdges/primaryBody/Sensor" to="." method="_on_sensor_body_exited"]
 [connection signal="body_entered" from="DuplicateOnEdges/primaryBody/Sensor" to="." method="_on_sensor_body_entered"]
 [connection signal="body_exited" from="DuplicateOnEdges/primaryBody/Sensor" to="." method="_on_sensor_body_exited"]

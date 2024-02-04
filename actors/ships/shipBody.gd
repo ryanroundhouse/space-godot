@@ -42,3 +42,6 @@ func wrapToOtherSide():
 	elif top_ship_node.position.y <= -zone.ZONE_HEIGHT / 2:
 		top_ship_node.position.y = zone.ZONE_HEIGHT / 2
 		emit_signal("primaryBodyWarped")
+
+func get_closest_body_dupe_position(position: Vector2):
+	return get_parent().get_parent().get_closest_body_dupe_position(position)
