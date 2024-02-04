@@ -16,7 +16,7 @@ func _process(delta):
 		
 	if player && targetOfCursor:
 		var player_position = player.global_position
-		var target_position = targetOfCursor.global_position
+		var target_position = targetOfCursor.get_closest_body_dupe_position(player.global_position)
 		var viewport_rect = get_viewport_rect()
 		var camera = get_viewport().get_camera_2d()
 

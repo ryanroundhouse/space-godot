@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uw0u3"]
 size = Vector2(100, 200)
 
-[node name="SpaceStation" type="Node2D" groups=["targettable"]]
+[node name="SpaceStation" type="Node2D" groups=["BodyDupe", "targettable"]]
 script = ExtResource("1_npkp7")
 
 [node name="DuplicateOnEdges" type="Node2D" parent="."]

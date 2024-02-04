@@ -16,7 +16,7 @@ script = ExtResource("1_53n8j")
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_lxxug")
 
-[node name="primaryBody" type="Area2D" parent="DuplicateOnEdges"]
+[node name="primaryBody" type="Area2D" parent="DuplicateOnEdges" groups=["BodyDupe"]]
 script = ExtResource("3_bjeww")
 
 [node name="Sprite2D" type="Sprite2D" parent="DuplicateOnEdges/primaryBody"]

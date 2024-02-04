@@ -17,7 +17,7 @@ script = ExtResource("1_jbux0")
 [node name="DuplicateOnEdges" type="Node2D" parent="."]
 script = ExtResource("1_invso")
 
-[node name="primaryBody" type="Area2D" parent="DuplicateOnEdges"]
+[node name="primaryBody" type="Area2D" parent="DuplicateOnEdges" groups=["BodyDupe"]]
 script = ExtResource("3_uispj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DuplicateOnEdges/primaryBody"]
