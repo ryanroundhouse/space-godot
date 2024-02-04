@@ -123,9 +123,13 @@ func duplicateBody(newBodyName: String, offset: Vector2):
 	newArea.name = newBodyName
 	newArea.duplicate_offset = offset
 	newArea.position += offset
-	if get_parent() is RigidBody2D:
+	
+	var parent = get_parent();
+	if parent is RigidBody2D:
 		newArea.rotation = primaryBody.angular_velocity
 
+	if (parent.has_method("register_BlowUp")):
+		parent.register_BlowUp(newArea)
 	#print("adding " + newBodyName + " at (" + str(newArea.position.x) + "," + str(newArea.position.y) + ")")
 	
 	add_child(newArea)

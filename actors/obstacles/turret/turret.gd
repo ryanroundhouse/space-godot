@@ -16,10 +16,13 @@ var primaryWeapon : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	find_child("primaryBody").connect("blowUp", onBlowUp)
+	register_BlowUp(find_child("primaryBody"))
 	primaryWeapon = primaryWeaponScene.instantiate()
 	primaryWeapon.rotation = deg_to_rad(90)
 	add_child(primaryWeapon)
+
+func register_BlowUp(body: Node2D):
+	body.connect("blowUp", onBlowUp)
 
 func onBlowUp():
 	var player = get_tree().get_nodes_in_group("player")
@@ -52,6 +55,13 @@ func _process(delta):
 		process_tracking(delta)
 	else:
 		print(name + " has unknown state")
+	
+	var primaryBody = find_child("primaryBody")
+	
+	for child in find_child("DuplicateOnEdges").get_children():
+		if child.name != "primaryBody":
+			child.global_position = primaryBody.global_position + child.duplicate_offset
+			child.global_rotation = primaryBody.global_rotation
 
 func process_tracking(delta):
 	var target_angle = (targets[0].global_position - global_position).angle()

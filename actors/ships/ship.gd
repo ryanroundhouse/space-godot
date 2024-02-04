@@ -25,9 +25,12 @@ func _ready():
 	primaryWeapon.rotation = deg_to_rad(90)
 	add_child(primaryWeapon)
 	
-	find_child("primaryBody").connect("blowUp", onBlowUp)
+	register_BlowUp(find_child("primaryBody"))
 	var primaryBody = find_child("primaryBody")
 	primaryBody.isPrimary = true
+
+func register_BlowUp(body: Node2D):
+	body.connect("blowUp", onBlowUp)
 
 func onBlowUp():
 	var player = get_tree().get_nodes_in_group("player")

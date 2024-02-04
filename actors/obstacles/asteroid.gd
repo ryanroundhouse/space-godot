@@ -5,7 +5,10 @@ var death_particle_scene = preload("res://actors/obstacles/asteroid_explosion.ts
 var asteroid_break_sound_path := "res://assets/obstacles/asteroid_break.wav" 
 
 func _ready():
-	find_child("primaryBody").connect("blowUp", onBlowUp)
+	register_BlowUp(find_child("primaryBody"))
+
+func register_BlowUp(body: Node2D):
+	body.connect("blowUp", onBlowUp)
 
 func onBlowUp():
 	var player = get_tree().get_nodes_in_group("player")
