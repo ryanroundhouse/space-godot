@@ -9,6 +9,7 @@ var turret_scene = preload("res://actors/obstacles/turret/turret.tscn")
 var jump_point_scene = preload("res://actors/obstacles/jump_point.tscn")
 var player_scene = preload("res://actors/players/player.tscn")
 var asteroid_spawner_scene = preload("res://actors/spawners/asteroid_spawner.tscn")
+var enemy_ship_spawner_scene = preload("res://actors/spawners/enemy_ship_spawner.tscn")
 var cursor_manager_scene = preload("res://actors/hud/cursor_manager.tscn")
 
 var music_path = "res://assets/music/journey_to_the_sun_stellardrone.mp3"
@@ -31,12 +32,13 @@ func _ready():
 	background.region_enabled = true
 	background.region_rect = Rect2(Vector2.ZERO, Vector2(8960,8960))
 	
-	load_asteroid_spawner(36)
+	#load_asteroid_spawner(36)
+	load_enemy_ship_spawner(1)
 	load_cursor_spawner()
 	
 	spawn_station(stationPosition)
 	#spawn_turret(turretPosition)
-	spawn_jump_point(jumpPointPosition)
+	#spawn_jump_point(jumpPointPosition)
 	launch_player(launchPosition, launchVelocity, launchDirection)
 
 func load_cursor_spawner():
@@ -47,6 +49,11 @@ func load_asteroid_spawner(number_of_asteroids):
 	var asteroid_spawner = asteroid_spawner_scene.instantiate()
 	asteroid_spawner.number_of_asteroids = number_of_asteroids
 	add_child(asteroid_spawner)
+
+func load_enemy_ship_spawner(number_of_enemy_ships):
+	var enemy_ship_spawner = enemy_ship_spawner_scene.instantiate()
+	enemy_ship_spawner.number_of_enemy_ships = number_of_enemy_ships
+	add_child(enemy_ship_spawner)
 
 func spawn_jump_point(jump_point_position: Vector2):
 	var jump_point = jump_point_scene.instantiate()
